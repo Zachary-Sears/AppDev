@@ -1,0 +1,34 @@
+Lesson 1:
+    Playlist for learning html is found here:
+        https://www.youtube.com/playlist?list=PL0Zuz27SZ-6OlAwitnFUubtE93DO-l0vu
+
+    All html files are a combination of element tags and text
+
+    Each file begins with an '<html>' opening tag and ends with an '</html>' closing tag.
+        Withing these two tags is the actual webpage definition.
+        The first half of which is the '<head></head>' tag set which holds and defines data not
+            on the actual page. However, if a <title></title> element is defined, this will show up
+            in the page's tab at the top of the browser.
+        The second half of the the page is the '<body></body>' tag set which defines what the page
+        displays. There are heading tags, such as '<h1></h1>' which display header size text,
+        and paragraph tags: '<p></p>' which display blocks of text.
+
+    Webpage vaildation can be done at https://validator.w3.org. This site allows file uploads to check
+        against current html conventions and definitions.
+
+Lesson 2:
+    An author and page description tag in the head of an html index file is useful for search engines to
+        learn more about a page. These are not displayed on the page itself and are formatted as follows:
+            <meta name = "author" content = "...">
+            <meta name = "desctription" content = "...">
+
+    There is a <link> element that can be placed in the <head> element.
+        <link> has two attributes:
+            rel (relation) - how does this element relate to the page
+            href (hypertext reference) - a reference to a resource that will be used by the page
+            type - what kind of resource is being refernced by this link
+
+    css code can be relegated to a separate file and replaced with a link to that file using
+        the previously described link element.
+        If this new file changes anymore in the future, I may put it in the html folder with this
+        notes file.
