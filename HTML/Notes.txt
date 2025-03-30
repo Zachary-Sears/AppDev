@@ -32,3 +32,19 @@ Lesson 2:
         the previously described link element.
         If this new file changes anymore in the future, I may put it in the html folder with this
         notes file.
+
+Lesson 3:
+    Moved the css and image files into the parent folder and the links broke.
+        Looked up a fix for this and found that because the files are in the
+        parent folder, I can use the ../<filename> relative path to reference them
+
+    <hr> - Horizontal rule - places a horizontal line across the page
+    <br> - Line break - inserts a line break
+    <em> - Empphasis - Empphasizes the text inside of the element. Does not create a new line.
+    <strong> - Strong Empphasis - Still Empphasizes the text but bolds the text instead of itallicizing it.
+    
+    & - Begins an html entity. A list of HTML entities can be found here: https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references
+        &nbsp; - Adds a space into a text block.
+        &lt; - less than '>'
+        &gt; - greater than '<;'
+        &copy - inserts the copyright symbol
