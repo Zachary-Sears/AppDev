@@ -53,19 +53,22 @@ Lesson 3:
 
     Coments: <!--"Text"-->
 
-    Lesson 4:
-       <ol> Ordered list - creates a numbered list by default
-       <ul> Unordered list - created a bulleted list by default
-       <li> list item
-       <dl> description list - creates a list of items with indented descriptions
-            <dt> description term - name of the list item
-            <dd> description details - details about the description term
-            Format of dl in a webpage by default is:
-                <body>
-                    <dl>
-                        item 1
-                            item 1 details
-                        item 2
-                            item 2 details
-                    </dl>
-                </body>
+Lesson 4:
+    <ol> Ordered list - creates a numbered list by default
+    <ul> Unordered list - created a bulleted list by default
+    <li> list item
+    <dl> description list - creates a list of items with indented descriptions
+        <dt> description term - name of the list item
+        <dd> description details - details about the description term
+        Format of dl in a webpage by default is:
+            <body>
+                <dl>
+                    item 1
+                        item 1 details
+                    item 2
+                        item 2 details
+                </dl>
+            </body>
+
+Lesson 5:
+    <a> anchor tag - used to link other webpages
