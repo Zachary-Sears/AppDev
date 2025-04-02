@@ -72,3 +72,4 @@ Lesson 4:
 
 Lesson 5:
     <a> anchor tag - used to link other webpages
+        attribute href defined in lesson 2 under the <link> element
