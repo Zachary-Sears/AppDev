@@ -1,3 +1,10 @@
+General Notes: 
+    From the Javascript tutorial: 'Where do I Put my Javascript? How to link
+    JavaScript to HTML | Tutorial for Beginners':
+        The script element: <script></script>, similarly to the link element, allows us to:
+            1. Write JavaScript directly into the element
+            2. Link a src JavaScript file
+
 Lesson 1:
     Playlist for learning html is found here:
         https://www.youtube.com/playlist?list=PL0Zuz27SZ-6OlAwitnFUubtE93DO-l0vu

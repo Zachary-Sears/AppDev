@@ -1,0 +1,139 @@
+Playlist for learning JavaScript is found here:
+    https://www.youtube.com/playlist?list=PL0Zuz27SZ-6Oi6xNtL_fwCrwpuqylMsgT
+
+
+Javascript Quick Start:
+
+    Javascript comments are denoted by double slash //
+
+    Datatypes:
+        String denoted by quotes: ""
+        number
+        boolean
+        undefined
+
+    Keyword 'let' declares a new variable
+    Keyword 'typeof' gives the type of a value
+
+    Variables are not statically typed. The type of a variable can be changed dynamically throughout a program
+
+    The + operator concatenates string types
+
+    Booolean operators:
+        Equality: ===
+        Inequality: !==
+        Greater or equal to: >=
+        Less or equal: <=
+        Greater: >
+        Less: <
+
+    The alert() function prints an alert box to the page with whatever is passed to it
+
+Lesson 1:
+
+    The console.log() function prints its arguments to the console
+
+Lesson 2:
+    Keyword 'const' declares a variable that cannot be reassigned
+
+    String methods:
+        string.length of a string provides the length of the string
+        string.charAt() function returns the character at the index given as an arguments
+            0 indexed
+        string.indexOf() function returns the first occurence of a substring within the string
+        string.lasIndexOf() function returns the last occurence of an arugment substring
+        
+        string.slice(x, y) function returns the substring between positions x and y within string
+            if y >= x, nothing is returned
+            Does not return the character at index y
+                if y = x + 1, only the character at index x is returned
+        string.slice(x) function returns the substring beginning from position x to the end of the string
+        
+        string.toUpperCase() function returns string in all uppercase
+        string.toLowerCase() function returns string in all lowercase
+
+        string.includes("string") function returns a boolean of whether "string" is equal to
+            or is a substring of string
+
+        string.split() function returns an array of strings which are substrings of string split at the position of an argument character
+            Removes the argument character from the resulting strings
+                i.e. Mathematic.split("e") returns ["Math", "matics"]
+            An argument of empty quotes , "", returns an array where each element is a letter in string
+                i.e. Toy.split("") returns ["T", "o", "y"]
+            
+            A webpage of all string methods available for JavaScript can be found here:
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+            Usefule String methods can be found here:
+                https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Useful_string_methods
+
+Lesson 3:
+    Integers and floats are number datatypes
+
+    A comparison between an int and float is false if the fractional part of the float is not equal to the int
+        i.e. 42 === 42.0 but 42 !== 42.01
+
+    A string can be cast to a number with the Number() function
+    String and underfined data passed to the Number() function returns NaN
+        NaN means "Not a Number"
+    Booleans passed to Number() will return 1 if true or 0 if false
+
+    Number methods:
+        Number.isInteger() function returns a boolean whether the argument is an integer
+        Number.parseFloat() function returns a floating point value equal to its argument
+            If the argument cannot be parged, return NaN
+        Number.parseInt() function removes non numeric characters
+            Converts non number datatypes to number
+        Number.toFixed() function limits decimal length to the number of decimals given as an argument
+            Rounds up when removing trailing decimals
+            Returns as a string
+        Number.toString() converts a number to a string
+        Number.isNaN() function returns boolean if value is NaN AND is a number
+            A global isNaN() function returns if the value is NaN only
+
+Lesson 4:
+    This lesson covers JS Math object. A complete list of fields and methods can be found here:
+        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
+
+    Useful Math object methods:
+        Math.trunc() function returns a truncated argument
+        Math.round() function returns the argument rounded to the nearest integer
+        Math.ceil() function returns the next largest integer from the argument
+        Math.floor() function returns the next smallest integer from the argument
+        Math.pow(x, y) function returns x raised to the power y
+        Math.min() function returns the smallest value in a list of numbers
+        Math.max() function returns the largest value in a list of numbers
+        Math.random() function returns a random value in the range [0, 1)
+            0 inclusive, 1 exclusive
+
+Lesson 5:
+    Coding challenge: Write code that will return a random letter from my name in main.js
+
+Lesson 6:
+    If statements
+    
+    undefined values evaluate to false
+
+Lesson 7:
+    Switch statements
+
+Lesson 8:
+    The ternary operator is a conditional operator
+    syntax: condition ? ifTrue : ifFalse;
+
+Lesson 9:
+    User input
+    The confirm() function returns true on an 'ok' input and false on a 'cancel' input
+    The prompt() function returns a string input if a value is input or null if nothing is entered and 'cancel' is clicked
+    The nullish coalescing operator '??' handles null inputs.
+        Acts as a conditional
+        i.e.
+            let name = prompt();
+            console.log(name ?? "value returned if 'name' is null");
+    
+    string.trim() trims whitespace
+
+Lesson 10:
+    A simple game
+    
+    location.reload() reloads the page
+    
