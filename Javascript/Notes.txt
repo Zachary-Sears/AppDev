@@ -133,7 +133,101 @@ Lesson 9:
     string.trim() trims whitespace
 
 Lesson 10:
-    A simple game
+    A simple rock, paper, scissors game
     
     location.reload() reloads the page
-    
+
+Lesson 11:
+    For loops, while loops, and do while loops
+
+    While structure:
+        while (condition) {
+            loop body
+        }
+
+    Do while structure:
+        do {
+            loop body
+        } while (condition)
+
+        in a do while loop occurs at least once
+
+    For structure:
+        for (index value initialization; condition; index increment) {
+            loop body
+        }
+
+Lesson 12:
+    Functions:
+        Declaration syntax:
+            function functionName(parameterList) {
+                function body
+            }
+
+        If an argument is missing from the function call, that argument is passed
+            to the function as undefined. In the case of the sum() function
+            in the accompanying main.js file in the Lesson 12 folder, the function will return NaN
+            unless handled properly.
+
+    typeof keyword prints the return type of a function
+
+        Arrow function declaration syntax:
+            variable = (parameterList) => {
+                functionBody;
+            }
+
+Lesson 13:
+    Comparing keywords const, let, var, and scope
+
+    All initilize variables
+
+    var responds differently from let and const
+        var can allow two variables to have the same name
+        However, var and let allow reassignment, const does not
+
+        Use const whenever possible otherwise, use let when a variable will need to be reassigned.
+        
+        Block scope is a type of general local scope in JS where a variable is scoped to a code block not tied to a function or loop
+            So function, loop, and conditional scopes are all block local scope, but brace defined blocks of code do not need to be tied to any of these
+
+        If var is used to re/assign a variable inside of a block within a function, it is function scoped
+            const and let is block scoped
+
+Lesson 14:
+    Arrays
+        declaration:
+            const arrayName = [];
+        
+        Elements in arrays do not need to be of the same type?
+        Arrays, like strings, have a length property.
+            This is likely because strings are arrays of characters.
+
+        Arrays are zero indexed.
+
+        Add elements to an array with the push() function
+        Remove elements from an array with the pop() function
+            Pop returns the item that gets removed
+        Add elements to the front of an array with the unshift() function
+            unshift returns the new length of the array
+        Remove an element from the front of an array with the shift() function
+            shift returns the item that gets removed
+
+        This generally should not be used, but one way to delete an element is through the delete keyword
+            delete array[index]
+        This way removes the element but does not shift the remaining elements into new indices as expected
+
+        The array.splice(startIndex, deleteCount, elementsToAdd[]) method deletes a number of elements from a starting index
+            splice can also replce elements with new ones
+            If no items are to be removed, numberToRemove = 0
+                If you want to add elements without removal, new elements get added before startIndex
+
+        Other array methods:
+            slice() behaves the same as for strings
+            reverse() reverses the element order in the array
+            join() creates a comma separated string of all the elements in the array
+            concat() concatenates the argument array to the end of the calling array
+                The spread operator: '...' is a new way to concat two or more arrays:
+                    const newArr = [...array1, ...array2]
+
+Lesson 15:
+    Refactoring rock, paper, scissors to first use a while loop and arrays and then with functions
