@@ -117,11 +117,11 @@ const determineWinner = (player, computer) => {
     const winner = player === computer
         ? "Tie game!" 
         : player === "rock" && computer === "paper"
-        ? "Computer wins with paper"
+        ? `Player: ${player}\nComputer: ${computer}\nComputer wins!`
         : player === "paper" && computer === "scissors"
-        ? "Computer wins with scissors"
+        ? `Player: ${player}\nComputer ${computer}\nComputer wins`
         : player === "scissors" && computer === "rock"
-        ? "Computer wins with rock"
+        ? `Player: ${player}\nComputer: ${computer}\nComputer wins`
         : "Player wins";
     
     return winner;
