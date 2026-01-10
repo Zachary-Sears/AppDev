@@ -1,0 +1,164 @@
+From the Flutter.dev documentation at: https://docs.flutter.dev/data-and-backend/state-mgmt/declarative
+
+    Flutter is a declarative language rather than imperative. This means that rather than changign discreet elements
+        of the UI, such as setting a new text value in a textView and rebuilding that specific view, Flutter's build
+        methods take in the state of the app and rebuilds the entire UI from scratch.
+        So if a button is pressed, the onPressed of that button would change the state of the app and trigger a full
+        UI rebuild.
+
+    Flutter's definition of state is: "whatever data you need to rebuild your UI at any given moment"
+    There are two types of state: ephemeral and app.
+
+Introduction to Declarative UI from: https://docs.flutter.dev/get-started/flutter-for/declarative
+
+    How to Change UI in a Declarative Framework:
+        Consider the following example:
+            A parent view ViewA a has a child ViewB b whose background color is yellow. ViewB has two more children: ViewC c1 and ViewC c2.
+            A change of state occurs where b's background color is now red, c1 and c2 are deleted, and a new instance of ViewC c3 is drawn.
+
+        In an imperative framework, the programmer must "manually" build new configurations by manipulating instance variables, declaring new instances if necessary, and telling the UI to update.
+        The cod for the above example in an imperative framework may look something like this:
+            // Imperative style
+            b.setColor(red)
+            b.clearChildren()
+            ViewC c3 = new ViewC(...)
+            b.add(c3)
+
+        In a declarative framework, view configurations are immutable "blueprints" and cannot be changed. Therefore, when a state change occurs, the entire UI element must be rebuilt from scratch.
+        This is done, most usually with the setState() method in StatefulWidgets. Rather than mutating an old instance, a new Widget is contructed and passed to the framework to handle updating app state
+            // Declarative style
+            return ViewB(color: red, child: const ViewC());
+        
+Differentiate Between Ephemeral State and App State:
+
+    Ephemeral/UI/Local State:
+        Ephemeral state is: "the state you can neatly contain in a single widget"
+            for example:
+                The current page of a PageView
+                The currently selected tab in a BottomNavigationBar
+
+        Ephemeral state is generally used in StatefulWidgets
+        
+        This type of state is meant for data I do not care about persisting across the app or between sessions
+
+    App/Shared State:
+        A state that is shared across the app or between sessions
+            examples:
+                User preferences
+                Login info
+                Read/unread state of emails
+
+        This type of state is meant for information I want to persist either across the app in a single session or between sessions
+
+        Management of app state depends on app complexity and nature
+
+    There is no clear-cut rule
+        It is up to me to decide what information goes into which of these two categories.
+
+        In summary and to quote the page directly: "Ephemeral state can be implemented using State and setState(), and is often local to a single widget. The rest is your app state."
+
+Simple App State Management:
+    Lifting State Up:
+        In declarative frameworks, it is extremely difficult to manipulate Widget objects from the outside. A MyCart Widget should not be updated with MyCart.updateWith(somethingNew).
+        If you want to change the UI, you HAVE to rebuild it. This is why state mutations like the aforementioned cart update are nigh impossible.
+
+        Instead of a method call, use a constructor: MyCart(contents)
+
+        The state of widgets, like a cart, that need to be accessed from outside should live "above" that widget.
+        The cart example comes from the Flutter doc example of a catalog/cart app where the catalog widget has a list of items that can be added to a second cart widget.
+        Both of these widgets live under the overall app widget. This allows the app to pull items out of the catlog and the state of the cart up to its level. The app then adds the item to the cart's state
+        and tells the cart to rebuild itself with the new state.
+
+    Accessing the State:
+        Using the provider package to access Widget state from a descendent Widget.
+            To use the provider package, the dependency must be added to pubspec.yaml
+            To add the dependency, run "flutter pub add provider" in a terminal
+            The import statement for provider is: "import 'package:provider/provider.dart';"
+
+        There are 3 concepts to understand when using provider:
+            1. ChangeNotifier
+            2. ChageNotifierProvider
+            3. Consumer
+
+            ChangeNotifier:
+                An observable class tied to a specified class model and notifies its listeners when changes to the model occur.
+
+                For the catalog/cart example, a CartModel class would extend the ChangeNotifier class like so:
+                    class CartModel extends ChangeNotifier {
+                        /// Internal, private state of the cart.
+                        final List<Item> _items = [];
+
+                        /// An unmodifiable view of the items in the cart.
+                        UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
+
+                        /// The current total price of all items (assuming all items cost $42).
+                        int get totalPrice => _items.length * 42;
+
+                        /// Adds [item] to cart. This and [removeAll] are the only ways to modify the
+                        /// cart from the outside.
+                        void add(Item item) {
+                            _items.add(item);
+                            // This call tells the widgets that are listening to this model to rebuild.
+                            notifyListeners();
+                        }
+
+                        /// Removes all items from the cart.
+                        void removeAll() {
+                            _items.clear();
+                            // This call tells the widgets that are listening to this model to rebuild.
+                            notifyListeners();
+                        }
+                    }
+                ChangeNotifier doesn't depend on any higher-level classes in Flutter
+            
+            ChangeNotifierProvider:
+                Comes from the provider package
+                It is a Widget that provides a ChangeNotifier instance to its descendents.
+                ChangeNotifierProvider must be placed above the widgets that need to access it.
+                
+                In our example, that place is above MyCatalog and MyCart.
+
+                Placement of this Widget must be deliberate and intentional because if it is placed too high, it can be accessed outside of its intended scope.
+                void main() {
+                    runApp(
+                        ChangeNotifierProvider(
+                        create: (context) => CartModel(),
+                        child: const MyApp(),
+                        ),
+                    );
+                }
+
+                MultiProvider allows a descendent to be provided with more than one class as a list.
+
+            Consumer:
+                The Consumer Widget tells the ChangeNotiferProvider which Widgets are listening for changes to the models being provided.
+                return Consumer<CartModel>(
+                    builder: (context, cart, child) {
+                        return Text('Total price: ${cart.totalPrice}');
+                    },
+                );
+
+                The builder is the only required argument of this Widget and is what notifyListeners() interacts with whenever that method is called in ChangeNotifier.
+                A builder takes in three arguments:
+                    context,
+                    A ChangeNotifier instance, or what we want to listen to,
+                    child, an optimization argument for only rebuilding expensive Widgets when absolutely necessary
+
+                Consumer Widgets should be placed as deep as possible in a Widget tree because you don't want an entire page to rebuild when a counter increments by one.
+                    // DO THIS
+                    return HumongousWidget(
+                    // ...
+                    child: AnotherMonstrousWidget(
+                        // ...
+                        child: Consumer<CartModel>(
+                            builder: (context, cart, child) {
+                                return Text('Total price: ${cart.totalPrice}');
+                            },
+                        ),
+                    ),
+                );
+
+            
+            Provider.of:
+                Use this when you need access a model's data but don't necssarily want it to rebuild. This is how it can be used:
+                    Provider.of<CartModel>(context, listen: false).removeAll();
