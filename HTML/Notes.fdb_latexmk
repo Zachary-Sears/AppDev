@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1769033199.07656 "c:/Users/Zac/Desktop/Github/AppDev/HTML/Notes.tex" "Notes.pdf" "Notes" 1769033199.6951 0
+["pdflatex"] 1769033589.89764 "c:/Users/Zac/Desktop/Github/AppDev/HTML/Notes.tex" "Notes.pdf" "Notes" 1769033590.37213 0
   "C:/Users/Zac/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1769028961 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Zac/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1769028621 11548 ff5a33b75eb99ec9ce4e7049b819b7a9 ""
   "C:/Users/Zac/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1768963526 13332560 968773f0a7716f8ebf3aa719def9e361 ""
@@ -58,10 +58,10 @@
   "C:/Users/Zac/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/Zac/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1751104012 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
   "C:/Users/Zac/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "Notes.aux" 1769033199 1101 0c9bde0e6190163290140a5e9cc97ce3 "pdflatex"
-  "Notes.out" 1769033199 541 0dc6621440e525f6f47d050c69b07401 "pdflatex"
-  "Notes.tex" 1769033198 5061 24913a90b15effd2864b60c30c67204c ""
-  "c:/Users/Zac/Desktop/Github/AppDev/HTML/Notes.tex" 1769033198 5061 24913a90b15effd2864b60c30c67204c ""
+  "Notes.aux" 1769033590 1101 0c9bde0e6190163290140a5e9cc97ce3 "pdflatex"
+  "Notes.out" 1769033590 541 0dc6621440e525f6f47d050c69b07401 "pdflatex"
+  "Notes.tex" 1769033588 5061 24913a90b15effd2864b60c30c67204c ""
+  "c:/Users/Zac/Desktop/Github/AppDev/HTML/Notes.tex" 1769033588 5061 24913a90b15effd2864b60c30c67204c ""
   (generated)
   "Notes.aux"
   "Notes.log"
