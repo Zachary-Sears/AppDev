@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan
+}
+\title{HTML Notes}
+\author{Zachary Sears}
+\begin{document}
+\maketitle
+\section{General Notes} \label{sec:General}
+From the Javascript tutorial:\\
+"Where do I Put my Javascript? How to link Javascript
+to HTML \textbar\ Tutorial for Beginners":
+The script element: <script></script>, similarly to the link element, allows us to:
+\begin{itemize}
+    \item Write JavaScript directly into the element
+    \item Link a src JavaScript file
+\end{itemize}
+
+\section{Lesson 1} \label{sec:L1}
+Playlist for learning HTML is found \href{https://www.youtube.com/playlist?list=PL0Zuz27SZ-6OlAwitnFUubtE93DO-l0vu}{here}.
+All HTML files are a combination of element tags and text.
+
+Each file begins with an \verb|<html>| opening tag and ends with an \verb|</html>| closing tag.
+Within these two tags is the actual webpage definition. The first half of which is the \verb|<head></head>| tag set which holds
+and defines data not on the actual page. However, if a \verb|<title></title>| element is defined, this will show up in the page's
+tab at the top of the browser. The second half of the page is the \verb|<body></body>| tag set which defines what the page displays.
+There are heading tags, such as \verb|<h1></h1>| which displays header size text, and paragraph tags: \verb|<p></p>| which dispalys
+blocks of text.
+Webpage validation can be done at \url{https://validator.w3.org}. This site allows file uploads to check against current HTML conventions
+and definitions.
+\section{Lesson 2} \label{sec:L2}
+An author and page description tag in the head of an HTML index file is useful for seach engines to learn more about a page. These are not
+displayed on the page itself and are formatted as follows:
+\begin{itemize}
+    \item \verb|<meta name = "author" content = "...">|
+    \item \verb|<meta name = "description" content = "...">|
+\end{itemize}
+There is a \verb|<link>| element that can be placed in the \verb|<head>| element. \verb|<link>| has three attributes:
+\begin{enumerate}
+    \item rel (relation) - How this element relates to the page.
+    \item href (hypertext reference) - A reference to a resource that will be used by the page.
+    \item type - What kind of resource is being referenced by this link.
+\end{enumerate}
+CSS code can be relegated to a separate file and replace with a link to that file using the previously described link element.
+\section{Lesson 3} \label{sec:L3}
+Moved the the CSS and image files into the parent folder and the links broke.
+Looked up a fix for this and found that because
+the files are in the parent folder, I can use the \verb|../<filename>| relative path to reference them.\\
+\\
+New tags:
+\begin{itemize}
+    \item \verb|<hr>| - Horizontal rule, places a horizontal line across the page.
+    \item \verb|<br>| - Line break, inserts a line break.
+    \item \verb|<em>| - Emphasis, emphasizes the text inside the element. Does not create a new line.
+    \item \verb|<strong>| - Strong emphasis, also emphasizes the text but bolds the text instead of itallicizing it.
+    \item \verb|&| - Begins an HTML entity. A list of HTML entities can be found \href{https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references}{here}
+    \begin{itemize}
+        \item \verb|&nbsp| - Adds a space into a text block.
+        \item \verb|&lt| - Less than: \verb|>|
+        \item \verb|&gt| - Greater than: \verb|<|
+        \item \verb|&copy| - Interts the copyright symbol.
+    \end{itemize}
+    \item \verb|<address>| - Displays an address on the page.
+    \item \verb|<!--...-->| - Comment structure.
+\end{itemize}
+
+\section{Lesson 4} \label{sec:L4}
+More new elements!
+\begin{itemize}
+    \item \verb|<ol>| - Ordered list, create a numbered list by default.
+    \item \verb|<ul>| - Unordered list, create a bulleted list by default.
+    \item \verb|<li>| - List item
+    \item \verb|<dl>| - Description list, create a list of items with indented descriptions.
+    \begin{itemize}
+        \item \verb|<dt>| - Description term, name of the list item.
+        \item \verb|<dd>| - Description details - details about the description term.
+        \item Format of \verb|<dl>| in a webpage by default is:
+        \begin{tabbing}
+            \verb|<body>| \\ 
+            \hspace{1em} \= \verb|<dl>| \\
+            \hspace{1em} \= \hspace{1em} \= item 1 \\
+            \hspace{1em} \= \hspace{1em} \= \hspace{1em} \= item 1 details \\
+            \hspace{1em} \= \hspace{1em} \= item 2 \\
+            \hspace{1em} \= \hspace{1em} \= \hspace{1em} \= item 2 details \\
+            \hspace{1em} \= \verb|</dl>| \\
+            \verb|</body>|\\
+        \end{tabbing}
+    \end{itemize}
+\end{itemize}
+
+\section{Lesson 5} \label{sec:L5}
+\verb|<a>| - Anchor tage, used to link other webpages. Attributes for href are defined in \ref{sec:L2} under the
+\verb|<link>| element.
+\end{document}
