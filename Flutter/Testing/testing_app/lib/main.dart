@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(title: 'Navigation Test', home: MyApp()));
+  runApp(
+    const MaterialApp(
+      home: Scaffold(body: Center(child: MyButton())),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyButton extends StatelessWidget {
+  const MyButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AboutScreen()),
-          );
-        },
-        child: const Text('Navigate'),
-      ),
-    );
-  }
-}
-
-class AboutScreen extends StatelessWidget {
-  const AboutScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('About')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Back'),
+    return GestureDetector(
+      onTap: () {
+        print('MyButton was tapped!');
+      },
+      child: Container(
+        height: 50,
+        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.lightGreen[500],
         ),
+        child: const Center(child: Text('Engage')),
       ),
     );
   }
