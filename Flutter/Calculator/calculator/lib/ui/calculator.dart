@@ -1,24 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Calculator extends StatelessWidget {
+class Calculator extends StatefulWidget {
   const Calculator({super.key});
 
   @override
+  State<Calculator> createState() => _CalculatorState();
+}
+
+class CalculatorState extends ChangeNotifier {
+  var currentDisplayText = '';
+  var result = 0;
+
+  void updateDisplayText(String newDisplayText) {
+    currentDisplayText += newDisplayText;
+    notifyListeners();
+  }
+
+  void updateResult(double nextCharacter) {}
+
+  void clearDisplayText() {
+    currentDisplayText = '';
+    notifyListeners();
+  }
+
+  void clearResult() {
+    result = 0;
+  }
+
+  void backspace() {
+    if (currentDisplayText.length - 1 <= 0) {
+      currentDisplayText = '';
+    } else {
+      currentDisplayText = currentDisplayText.substring(
+        0,
+        currentDisplayText.length - 1,
+      );
+    }
+    notifyListeners();
+  }
+}
+
+class _CalculatorState extends State<Calculator> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          children: [
-            Display(),
-            Divider(
-              color: Colors.deepPurple,
-              indent: 15,
-              endIndent: 15,
-              thickness: 2.5,
-              radius: BorderRadius.all(Radius.circular(5)),
+    return ChangeNotifierProvider(
+      create: (context) => CalculatorState(),
+      child: MaterialApp(
+        home: Scaffold(
+          body: Expanded(
+            child: Column(
+              children: [
+                Display(),
+                Divider(
+                  color: Colors.deepPurple,
+                  indent: 15,
+                  endIndent: 15,
+                  thickness: 2.5,
+                  radius: BorderRadius.all(Radius.circular(5)),
+                ),
+                ButtonMatrix(),
+              ],
             ),
-            ButtonMatrix(),
-          ],
+          ),
         ),
       ),
     );
@@ -30,13 +74,17 @@ class Display extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var displayAppState = context.watch<CalculatorState>();
+    var currentDisplayText = displayAppState.currentDisplayText;
+
     return Padding(
-      padding: EdgeInsetsGeometry.fromLTRB(25, 150, 25, 0),
+      padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            '',
+            currentDisplayText,
             textAlign: TextAlign.right,
             style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
           ),
@@ -51,15 +99,20 @@ class ButtonMatrix extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var buttonMatrixAppState = context.watch<CalculatorState>();
+
     return Column(
       children: [
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(25, 5, 25, 5),
+          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.clearDisplayText();
+                  buttonMatrixAppState.clearResult();
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -81,7 +134,10 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.backspace();
+                  //Reverse previous opration
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -113,7 +169,9 @@ class ButtonMatrix extends StatelessWidget {
                 child: Icon(Icons.history_rounded, size: 50),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('/');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -138,12 +196,14 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(25, 5, 25, 5),
+          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('1');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -165,7 +225,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('2');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -187,7 +249,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('3');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -209,7 +273,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('x');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -234,12 +300,14 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(25, 5, 25, 5),
+          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('4');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -261,7 +329,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('5');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -283,7 +353,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('6');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -305,7 +377,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('+');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -330,12 +404,14 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(25, 5, 25, 5),
+          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('7');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -357,7 +433,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('8');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -379,7 +457,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('9');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -401,7 +481,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('-');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -426,7 +508,7 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(25, 5, 25, 5),
+          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -453,7 +535,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('0');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -475,7 +559,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('.');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -497,7 +583,9 @@ class ButtonMatrix extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('=');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
