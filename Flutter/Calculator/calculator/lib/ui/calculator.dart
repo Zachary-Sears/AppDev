@@ -24,8 +24,8 @@ class Calculator extends StatelessWidget {
             ),
             Divider(
               color: Colors.black,
-              indent: 25,
-              endIndent: 25,
+              indent: 15,
+              endIndent: 15,
               thickness: 2.5,
               radius: BorderRadius.all(Radius.circular(5)),
             ),
