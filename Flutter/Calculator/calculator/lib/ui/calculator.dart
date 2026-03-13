@@ -15,9 +15,12 @@ class Calculator extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'Text',
+                    '1+2=3',
                     textAlign: TextAlign.right,
-                    style: TextStyle(fontSize: 75, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                      fontSize: 75,
+                      fontFamily: 'NanumGothicCoding',
+                    ),
                   ),
                 ],
               ),
