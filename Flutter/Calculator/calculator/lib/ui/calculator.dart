@@ -9,13 +9,22 @@ class Calculator extends StatefulWidget {
 }
 
 class CalculatorState extends ChangeNotifier {
-  var currentDisplayText = '';
-  var result = 0;
+  var currentDisplayText = ''; //Currently displayed text
+  var result = 0; //Calculation result
 
   void updateDisplayText(String newDisplayText) {
     currentDisplayText += newDisplayText;
     notifyListeners();
   }
+
+  /*
+   * I need a binary tree built from an unknown expression to calculate the expression's result.
+   * This tree will be an expression tree.
+   * 
+   * It will store numbers as doubles and operators as strings.
+   * The biggest issue I will have to resolve is the case where a multiplication appears after an
+   *    addition or subtraction. This will restructure the tree.
+   */
 
   void updateResult(double nextCharacter) {}
 
@@ -85,7 +94,6 @@ class Display extends StatelessWidget {
         children: [
           Text(
             currentDisplayText,
-            textAlign: TextAlign.right,
             style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
           ),
         ],
