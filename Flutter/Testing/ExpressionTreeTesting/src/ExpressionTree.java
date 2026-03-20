@@ -29,59 +29,48 @@ public class ExpressionTree<T> implements ExpressionTreeInterface<String> {
     }
 
     public void generateTree(String data) {
-        String postFixData = convertToPostFix(data);
-        ExpressionTree<String> tree = generateSubTree(postFixData);
+        ExpressionTree<String> tree = generateSubTree(data);
         root = tree.root;
         size += tree.getSize();
     }
 
     private ExpressionTree<String> generateSubTree(String data) {
         ExpressionTree<String> retTree = new ExpressionTree<>();
-        Stack<Node<String>> characterStack = new Stack<>();
-        Node<String> temp;
+        Stack<Character> operatorStack = new Stack<>();
+        Stack<Node<String>> nodeStack = new Stack<>();
+
+        int dataIndex = 0;
+
+        while (dataIndex < data.length()) {
+            if (Character.isDigit(data.charAt(dataIndex))) {
+                String number = "";
+                while (dataIndex < data.length() && Character.isDigit(data.charAt(dataIndex)))
+                    number += data.charAt(dataIndex ++);
+                nodeStack.push(new Node<>(number));
+            } else {
+                while (!operatorStack.isEmpty() && 
+                        (precedence(operatorStack.peek()) > precedence(data.charAt(dataIndex)) ||
+                         precedence(operatorStack.peek()) == precedence(data.charAt(dataIndex)))) {
+                    char operator = operatorStack.pop();
+                    Node<String> right = nodeStack.pop();
+                    Node<String> left = nodeStack.pop();
+                    nodeStack.push(new Node<>(String.valueOf(operator), left, right));
+                }
+                operatorStack.push(data.charAt(dataIndex));
+                dataIndex ++;
+            }
+        }
+
+        while (!operatorStack.isEmpty()) {
+            char operator = operatorStack.pop();
+            Node<String> right = nodeStack.pop();
+            Node<String> left = nodeStack.pop();
+            nodeStack.push(new Node<>(String.valueOf(operator), left, right));
+        }
+
+        retTree.setRootNode(nodeStack.pop());
         
-        for (int i = 0; i < data.length(); i ++) {
-            if (!isOperator(data.charAt(i))) {
-                temp = new Node<>(String.valueOf(data.charAt(i)));
-                characterStack.push(temp);
-            } else {
-                temp = new Node<>(String.valueOf(data.charAt(i)));
-                temp.setRight(characterStack.pop());
-                temp.setLeft(characterStack.pop());
-
-                characterStack.push(temp);
-            }
-        }
-
-        retTree.setRootNode(characterStack.pop());;
-
         return retTree;
-    }
-
-    private String convertToPostFix(String data) {
-        Stack<Character> characterStack = new Stack<>();
-        String postFixData = "";
-
-        for (int i = 0; i < data.length(); i ++) {
-            char c = data.charAt(i);
-
-            if (!isOperator(c)) {
-                postFixData += c;
-            } else {
-                if (!characterStack.isEmpty())
-                    while (!characterStack.isEmpty() && 
-                        (precedence(characterStack.peek()) > precedence(c) || 
-                        precedence(characterStack.peek()) == precedence(c)))
-                    postFixData += characterStack.pop();
-                characterStack.push(c);
-            }
-        }
-
-        while (!characterStack.isEmpty()) {
-            postFixData += characterStack.pop();
-        }
-
-        return postFixData;
     }
 
     private static int precedence(char operator) {
@@ -91,10 +80,6 @@ public class ExpressionTree<T> implements ExpressionTreeInterface<String> {
             return 1;
         else
             return -1;
-    }
-
-    private boolean isOperator(char c) {
-        return c == '+' || c == '-' || c == '*' || c == '/';
     }
 
     private void setRootNode(Node<String> rootNode) {
