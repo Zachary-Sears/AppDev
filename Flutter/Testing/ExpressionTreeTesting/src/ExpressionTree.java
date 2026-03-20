@@ -2,7 +2,6 @@ package src;
 
 import interfaces.*;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 /**
@@ -30,60 +29,78 @@ public class ExpressionTree<T> implements ExpressionTreeInterface<String> {
     }
 
     public void generateTree(String data) {
-        ExpressionTree<String> tree = generateSubTree(data);
+        String postFixData = convertToPostFix(data);
+        ExpressionTree<String> tree = generateSubTree(postFixData);
         root = tree.root;
         size += tree.getSize();
     }
 
-    /**
-     * This method generates the subtrees of the full expression tree. From a given expression string.
-     *      There are a few cases in this construction:
-     *          1. There is only one level of precedence. In other words, an expression
-     *              only contains addition/subtraction OR multiplication/division.
-     *          2. There is a mix of precedence. The expression contains addition/subtraction and multiplication/division.
-     *                  - In this case all multiplication and/or division must be processed affter addition/subtraction.
-     *                  - Multiplication/division trees must be set as the left tree for an addition/subtraction operator if they appear
-     *                      before such an operator or as a right tree if they appear after such an operator.
-     * @param data
-     * @return
-     */
     private ExpressionTree<String> generateSubTree(String data) {
         ExpressionTree<String> retTree = new ExpressionTree<>();
-        String operator = "";
-        ExpressionTree<String> leftTree = new ExpressionTree<>();
-        ExpressionTree<String> rightTree = new ExpressionTree<>();
-
-        // Iterate through input string
+        Stack<Node<String>> characterStack = new Stack<>();
+        Node<String> temp;
+        
         for (int i = 0; i < data.length(); i ++) {
-            //Find all addition/subtraction operators
-            if (data.charAt(i) == '+' || data.charAt(i) == '-') {
-                operator = String.valueOf(data.charAt(i));
-                leftTree = generateSubTree(data.substring(0, i));
-                if (i + 1 < data.length()) {
-                rightTree = generateSubTree(data.substring(i + 1));
-                }
+            if (!isOperator(data.charAt(i))) {
+                temp = new Node<>(String.valueOf(data.charAt(i)));
+                characterStack.push(temp);
+            } else {
+                temp = new Node<>(String.valueOf(data.charAt(i)));
+                temp.setRight(characterStack.pop());
+                temp.setLeft(characterStack.pop());
 
-                //retTree.setTree(operator, leftTree, rightTree);
+                characterStack.push(temp);
             }
         }
 
-        for (int i = data.length() - 1; i >= 0; i --) {
-            //Find all multiplication/subtraction operators
-            if (data.charAt(i) == '*' || data.charAt(i) == '/') {
-                operator = String.valueOf(data.charAt(i));
-                leftTree = generateSubTree(data.substring(0, i));
-                if (i + 1 < data.length()) {
-                    rightTree = generateSubTree(data.substring(i + 1));
-                    break;
-                }
-            }
-        }
+        retTree.setRootNode(characterStack.pop());;
 
-        if (operator.isBlank())
-            retTree.setRootData(data);
-        else
-            retTree.setTree(operator, leftTree, rightTree);
         return retTree;
+    }
+
+    private String convertToPostFix(String data) {
+        Stack<Character> characterStack = new Stack<>();
+        String postFixData = "";
+
+        for (int i = 0; i < data.length(); i ++) {
+            char c = data.charAt(i);
+
+            if (!isOperator(c)) {
+                postFixData += c;
+            } else {
+                if (!characterStack.isEmpty())
+                    while (!characterStack.isEmpty() && 
+                        (precedence(characterStack.peek()) > precedence(c) || 
+                        precedence(characterStack.peek()) == precedence(c)))
+                    postFixData += characterStack.pop();
+                characterStack.push(c);
+            }
+        }
+
+        while (!characterStack.isEmpty()) {
+            postFixData += characterStack.pop();
+        }
+
+        return postFixData;
+    }
+
+    private static int precedence(char operator) {
+        if (operator == '*' || operator == '/')
+            return 2;
+        else if (operator == '+' || operator == '-')
+            return 1;
+        else
+            return -1;
+    }
+
+    private boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/';
+    }
+
+    private void setRootNode(Node<String> rootNode) {
+        root = new Node<>(rootNode.getData());
+        root.setLeft(rootNode.getLeft());
+        root.setRight(rootNode.getRight());
     }
 
     public void remove(String target) {

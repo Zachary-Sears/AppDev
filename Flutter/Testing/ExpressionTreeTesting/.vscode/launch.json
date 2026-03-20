@@ -9,6 +9,13 @@
             "name": "Entry",
             "request": "launch",
             "mainClass": "src.Entry",
+            "projectName": "ExpressionTreeTesting_bac8d014"
+        },
+        {
+            "type": "java",
+            "name": "Entry",
+            "request": "launch",
+            "mainClass": "src.Entry",
             "projectName": "ExpressionTreeTesting_e2afb897"
         },
         {
