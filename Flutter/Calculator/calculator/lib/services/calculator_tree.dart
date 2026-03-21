@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:stack/stack.dart';
 
 import '../services/node.dart';
@@ -75,13 +73,13 @@ class CalculatorTree {
 
     if (node == null) {
       result = 0;
-    } else if (node!.isLeaf()) {
-      String value = node!.data;
+    } else if (node.isLeaf()) {
+      String value = node.data;
       result = double.parse(value);
     } else {
-      double firstOperand = getResult(node!.leftNode);
-      double secondOperand = getResult(node!.rightNode);
-      String operator = node!.data;
+      double firstOperand = getResult(node.leftNode);
+      double secondOperand = getResult(node.rightNode);
+      String operator = node.data;
 
       result = compute(operator, firstOperand, secondOperand);
     }
