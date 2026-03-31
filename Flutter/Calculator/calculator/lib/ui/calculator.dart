@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../services/calculator_tree.dart';
+
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
 
@@ -10,23 +12,20 @@ class Calculator extends StatefulWidget {
 
 class CalculatorState extends ChangeNotifier {
   var currentDisplayText = ''; //Currently displayed text
-  var result = 0; //Calculation result
+  double result = 0; //Calculation result
 
-  void updateDisplayText(String newDisplayText) {
-    currentDisplayText += newDisplayText;
+  void updateDisplayText(String newCharacter) {
+    if (newCharacter == '=') {
+      CalculatorTree tree = CalculatorTree(currentDisplayText);
+      tree.generateTree();
+      result = tree.evaluate();
+      currentDisplayText += newCharacter;
+      currentDisplayText += result.toString();
+    } else {
+      currentDisplayText += newCharacter;
+    }
     notifyListeners();
   }
-
-  /*
-   * I need a binary tree built from an unknown expression to calculate the expression's result.
-   * This tree will be an expression tree.
-   * 
-   * It will store numbers as doubles and operators as strings.
-   * The biggest issue I will have to resolve is the case where a multiplication appears after an
-   *    addition or subtraction. This will restructure the tree.
-   */
-
-  void updateResult(double nextCharacter) {}
 
   void clearDisplayText() {
     currentDisplayText = '';
@@ -282,7 +281,7 @@ class ButtonMatrix extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  buttonMatrixAppState.updateDisplayText('x');
+                  buttonMatrixAppState.updateDisplayText('*');
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
@@ -297,7 +296,7 @@ class ButtonMatrix extends StatelessWidget {
                   }),
                 ),
                 child: Text(
-                  'X',
+                  '*',
                   style: TextStyle(
                     fontSize: 75,
                     fontFamily: 'NanumGothicCoding',
@@ -386,7 +385,7 @@ class ButtonMatrix extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  buttonMatrixAppState.updateDisplayText('+');
+                  buttonMatrixAppState.updateDisplayText('-');
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
@@ -401,7 +400,7 @@ class ButtonMatrix extends StatelessWidget {
                   }),
                 ),
                 child: Text(
-                  '+',
+                  '-',
                   style: TextStyle(
                     fontSize: 75,
                     fontFamily: 'NanumGothicCoding',
@@ -490,7 +489,7 @@ class ButtonMatrix extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  buttonMatrixAppState.updateDisplayText('-');
+                  buttonMatrixAppState.updateDisplayText('+');
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
@@ -505,7 +504,7 @@ class ButtonMatrix extends StatelessWidget {
                   }),
                 ),
                 child: Text(
-                  '-',
+                  '+',
                   style: TextStyle(
                     fontSize: 75,
                     fontFamily: 'NanumGothicCoding',

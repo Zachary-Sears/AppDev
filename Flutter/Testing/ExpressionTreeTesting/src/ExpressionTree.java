@@ -34,55 +34,58 @@ public class ExpressionTree<T> implements ExpressionTreeInterface<String> {
         size += tree.getSize();
     }
 
-    /**
-     * This method generates the subtrees of the full expression tree. From a given expression string.
-     *      There are a few cases in this construction:
-     *          1. There is only one level of precedence. In other words, an expression
-     *              only contains addition/subtraction OR multiplication/division.
-     *          2. There is a mix of precedence. The expression contains addition/subtraction and multiplication/division.
-     *                  - In this case all multiplication and/or division must be processed affter addition/subtraction.
-     *                  - Multiplication/division trees must be set as the left tree for an addition/subtraction operator if they appear
-     *                      before such an operator or as a right tree if they appear after such an operator.
-     * @param data
-     * @return
-     */
     private ExpressionTree<String> generateSubTree(String data) {
         ExpressionTree<String> retTree = new ExpressionTree<>();
-        String operator = "";
-        ExpressionTree<String> leftTree = new ExpressionTree<>();
-        ExpressionTree<String> rightTree = new ExpressionTree<>();
+        Stack<Character> operatorStack = new Stack<>();
+        Stack<Node<String>> nodeStack = new Stack<>();
 
-        // Iterate through input string
-        for (int i = 0; i < data.length(); i ++) {
-            //Find all addition/subtraction operators
-            if (data.charAt(i) == '+' || data.charAt(i) == '-') {
-                operator = String.valueOf(data.charAt(i));
-                leftTree = generateSubTree(data.substring(0, i));
-                if (i + 1 < data.length()) {
-                rightTree = generateSubTree(data.substring(i + 1));
+        int dataIndex = 0;
+
+        while (dataIndex < data.length()) {
+            if (Character.isDigit(data.charAt(dataIndex))) {
+                String number = "";
+                while (dataIndex < data.length() && Character.isDigit(data.charAt(dataIndex)))
+                    number += data.charAt(dataIndex ++);
+                nodeStack.push(new Node<>(number));
+            } else {
+                while (!operatorStack.isEmpty() && 
+                        (precedence(operatorStack.peek()) > precedence(data.charAt(dataIndex)) ||
+                         precedence(operatorStack.peek()) == precedence(data.charAt(dataIndex)))) {
+                    char operator = operatorStack.pop();
+                    Node<String> right = nodeStack.pop();
+                    Node<String> left = nodeStack.pop();
+                    nodeStack.push(new Node<>(String.valueOf(operator), left, right));
                 }
-
-                //retTree.setTree(operator, leftTree, rightTree);
+                operatorStack.push(data.charAt(dataIndex));
+                dataIndex ++;
             }
         }
 
-        for (int i = data.length() - 1; i >= 0; i --) {
-            //Find all multiplication/subtraction operators
-            if (data.charAt(i) == '*' || data.charAt(i) == '/') {
-                operator = String.valueOf(data.charAt(i));
-                leftTree = generateSubTree(data.substring(0, i));
-                if (i + 1 < data.length()) {
-                    rightTree = generateSubTree(data.substring(i + 1));
-                    break;
-                }
-            }
+        while (!operatorStack.isEmpty()) {
+            char operator = operatorStack.pop();
+            Node<String> right = nodeStack.pop();
+            Node<String> left = nodeStack.pop();
+            nodeStack.push(new Node<>(String.valueOf(operator), left, right));
         }
 
-        if (operator.isBlank())
-            retTree.setRootData(data);
-        else
-            retTree.setTree(operator, leftTree, rightTree);
+        retTree.setRootNode(nodeStack.pop());
+        
         return retTree;
+    }
+
+    private static int precedence(char operator) {
+        if (operator == '*' || operator == '/')
+            return 2;
+        else if (operator == '+' || operator == '-')
+            return 1;
+        else
+            return -1;
+    }
+
+    private void setRootNode(Node<String> rootNode) {
+        root = new Node<>(rootNode.getData());
+        root.setLeft(rootNode.getLeft());
+        root.setRight(rootNode.getRight());
     }
 
     public void remove(String target) {
