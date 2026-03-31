@@ -160,7 +160,7 @@ class ButtonMatrix extends StatelessWidget {
                 child: Icon(Icons.backspace, size: 50),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {/*TODO*/},
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
@@ -173,7 +173,13 @@ class ButtonMatrix extends StatelessWidget {
                     return null; // Use the component's default.
                   }),
                 ),
-                child: Icon(Icons.history_rounded, size: 50),
+                child: Text(
+                  '()',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontFamily: 'NanumGothicCoding',
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
