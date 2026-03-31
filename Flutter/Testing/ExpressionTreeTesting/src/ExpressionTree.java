@@ -2,7 +2,6 @@ package src;
 
 import interfaces.*;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 /**
