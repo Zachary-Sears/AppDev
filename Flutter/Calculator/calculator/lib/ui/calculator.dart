@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 import '../services/calculator_tree.dart';
@@ -13,6 +16,7 @@ class Calculator extends StatefulWidget {
 class CalculatorState extends ChangeNotifier {
   var currentDisplayText = ''; //Currently displayed text
   double result = 0; //Calculation result
+  int parenIndicator = 0; //A count of how many currently open parenthesis pairs occur in the expression
 
   void updateDisplayText(String newCharacter) {
     if (newCharacter == '=') {
@@ -21,7 +25,12 @@ class CalculatorState extends ChangeNotifier {
       result = tree.evaluate();
       currentDisplayText += newCharacter;
       currentDisplayText += result.toString();
-    } else {
+    } else if (newCharacter == '(') {
+      //Check if parentIndicator > 0
+      //Check if previous character is an operator
+      //  If prevChar is operator, add open paren and increment parenInidicator
+      //  else add closing paren and decrement parenindicator
+      } else {
       currentDisplayText += newCharacter;
     }
     notifyListeners();
@@ -46,6 +55,10 @@ class CalculatorState extends ChangeNotifier {
       );
     }
     notifyListeners();
+  }
+
+  bool isOperator(String character) {
+    return character == '+' || character == '-' || character == '*' || character == '/';
   }
 }
 
@@ -160,6 +173,13 @@ class ButtonMatrix extends StatelessWidget {
                 child: Icon(Icons.backspace, size: 50),
               ),
               ElevatedButton(
+                /**
+                 * What do I need this button to do?
+                 *    It needs to add an open paren if none are there
+                 *    Needs to add a close paren if an open paren exists.
+                 *      Cannot just check if an open paren exists because there could already be a matching close paren
+                 *      Need an incrementer to track how many open parens there are.
+                 */
                 onPressed: () {/*TODO*/},
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((

@@ -22,7 +22,7 @@ class CalculatorTree {
     while (i < expression!.length) {
       if (isDigit(expression![i])) {
         String number = '';
-        while (i < expression!.length && isDigit(expression![i])) {
+        while (i < expression!.length && (isDigit(expression![i]) || expression![i] == '.')) {
           number += expression![i++];
         }
         nodeStack.push(Node.fromData(number));
