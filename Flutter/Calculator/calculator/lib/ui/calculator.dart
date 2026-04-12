@@ -26,18 +26,36 @@ class CalculatorState extends ChangeNotifier {
       currentDisplayText += newCharacter;
       currentDisplayText += result.toString();
     } else if (newCharacter == '(') {
-      //Check if parentIndicator > 0
-      //Check if previous character is an operator
-      //  If prevChar is operator, add open paren and increment parenInidicator
-      //  else add closing paren and decrement parenindicator
+      /*
+       * Add open paren when:
+       *    the display text is empty
+       *    the previous character is an operator
+       */
+      if (parenIndicator > 0) {
+        if (currentDisplayText.isEmpty) {
+          currentDisplayText += '(';
+          parenIndicator ++;
+        } else if (currentDisplayText[currentDisplayText.length - 1] == '(' || isOperator(currentDisplayText[currentDisplayText.length - 1])) {
+          currentDisplayText += '(';
+          parenIndicator ++;
+        } else {
+          currentDisplayText += ')';
+          parenIndicator --;
+        }
       } else {
+        currentDisplayText += '(';
+        parenIndicator ++;
+      }
+    } else {
       currentDisplayText += newCharacter;
     }
+
     notifyListeners();
   }
 
   void clearDisplayText() {
     currentDisplayText = '';
+    parenIndicator = 0;
     notifyListeners();
   }
 
@@ -48,7 +66,12 @@ class CalculatorState extends ChangeNotifier {
   void backspace() {
     if (currentDisplayText.length - 1 <= 0) {
       currentDisplayText = '';
+      parenIndicator = 0;
     } else {
+      if (currentDisplayText[currentDisplayText.length - 1] == '('){
+        parenIndicator --;
+      }
+
       currentDisplayText = currentDisplayText.substring(
         0,
         currentDisplayText.length - 1,
@@ -180,7 +203,9 @@ class ButtonMatrix extends StatelessWidget {
                  *      Cannot just check if an open paren exists because there could already be a matching close paren
                  *      Need an incrementer to track how many open parens there are.
                  */
-                onPressed: () {/*TODO*/},
+                onPressed: () {
+                  buttonMatrixAppState.updateDisplayText('(');
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                     Set<WidgetState> states,
