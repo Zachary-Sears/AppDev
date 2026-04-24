@@ -26,6 +26,11 @@ class CalculatorTree {
           number += expression![i++];
         }
         nodeStack.push(Node.fromData(number));
+      } else if (expression![i] == '(') {
+        String subexpression = '';        
+        CalculatorTree subTree = CalculatorTree(subexpression);
+        subTree.generateTree();
+        nodeStack.push(subTree.root!);
       } else {
         while (operatorStack.isNotEmpty &&
             (precedence(operatorStack.top()) > precedence(expression![i]) ||
