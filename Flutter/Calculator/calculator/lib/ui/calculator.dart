@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../services/calculator_tree.dart';
 
@@ -16,15 +15,20 @@ class Calculator extends StatefulWidget {
 class CalculatorState extends ChangeNotifier {
   var currentDisplayText = ''; //Currently displayed text
   double result = 0; //Calculation result
-  int parenIndicator = 0; //A count of how many currently open parenthesis pairs occur in the expression
+  int parenIndicator =
+      0; //A count of how many currently open parenthesis pairs occur in the expression
 
   void updateDisplayText(String newCharacter) {
     if (newCharacter == '=') {
-      CalculatorTree tree = CalculatorTree(currentDisplayText);
-      tree.generateTree();
-      result = tree.evaluate();
-      currentDisplayText += newCharacter;
-      currentDisplayText += result.toString();
+      if (currentDisplayText.isEmpty) {
+        currentDisplayText = '0=0';
+      } else {
+        CalculatorTree tree = CalculatorTree(currentDisplayText);
+        tree.generateTree();
+        result = tree.evaluate();
+        currentDisplayText += newCharacter;
+        currentDisplayText += result.toString();
+      }
     } else if (newCharacter == '(') {
       /*
        * Add open paren when:
@@ -34,17 +38,18 @@ class CalculatorState extends ChangeNotifier {
       if (parenIndicator > 0) {
         if (currentDisplayText.isEmpty) {
           currentDisplayText += '(';
-          parenIndicator ++;
-        } else if (currentDisplayText[currentDisplayText.length - 1] == '(' || isOperator(currentDisplayText[currentDisplayText.length - 1])) {
+          parenIndicator++;
+        } else if (currentDisplayText[currentDisplayText.length - 1] == '(' ||
+            isOperator(currentDisplayText[currentDisplayText.length - 1])) {
           currentDisplayText += '(';
-          parenIndicator ++;
+          parenIndicator++;
         } else {
           currentDisplayText += ')';
-          parenIndicator --;
+          parenIndicator--;
         }
       } else {
         currentDisplayText += '(';
-        parenIndicator ++;
+        parenIndicator++;
       }
     } else {
       currentDisplayText += newCharacter;
@@ -68,8 +73,8 @@ class CalculatorState extends ChangeNotifier {
       currentDisplayText = '';
       parenIndicator = 0;
     } else {
-      if (currentDisplayText[currentDisplayText.length - 1] == '('){
-        parenIndicator --;
+      if (currentDisplayText[currentDisplayText.length - 1] == '(') {
+        parenIndicator--;
       }
 
       currentDisplayText = currentDisplayText.substring(
@@ -81,7 +86,10 @@ class CalculatorState extends ChangeNotifier {
   }
 
   bool isOperator(String character) {
-    return character == '+' || character == '-' || character == '*' || character == '/';
+    return character == '+' ||
+        character == '-' ||
+        character == '*' ||
+        character == '/';
   }
 }
 
@@ -123,15 +131,14 @@ class Display extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
+      child: Align(alignment: AlignmentGeometry.centerEnd, child: 
+          AutoSizeText(
             currentDisplayText,
             style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
+            minFontSize: 40,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
-        ],
       ),
     );
   }
