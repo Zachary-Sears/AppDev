@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../services/calculator_tree.dart';
 
@@ -130,14 +131,15 @@ class Display extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
-      child: Align(alignment: AlignmentGeometry.centerEnd, child: 
-          AutoSizeText(
-            currentDisplayText,
-            style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
-            minFontSize: 40,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+      child: Align(
+        alignment: AlignmentGeometry.centerRight,
+        child: AutoSizeText(
+          currentDisplayText,
+          style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
+          minFontSize: 40,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }
