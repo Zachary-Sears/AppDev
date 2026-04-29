@@ -22,12 +22,38 @@ class CalculatorTree {
     while (i < expression!.length) {
       if (isDigit(expression![i])) {
         String number = '';
-        while (i < expression!.length && (isDigit(expression![i]) || expression![i] == '.')) {
+        while (i < expression!.length &&
+            (isDigit(expression![i]) || expression![i] == '.')) {
           number += expression![i++];
         }
         nodeStack.push(Node.fromData(number));
       } else if (expression![i] == '(') {
-        String subexpression = '';        
+        String subexpression = '';
+        int parenIndicator = 0;
+        i++;
+        while (i < expression!.length) {
+          // If the parenthesis indicator is zero, meaning all parenthesis pairs are acconted for, and the current character, is a
+          //    close paren, break out of the loop and generate a tree on the subexpression
+          if (parenIndicator < 1 && expression![i] == ')') {
+            break;
+          } else {
+            // The current character is either a digit, a decimal point, an open parenthesis, or a closing parenthesis
+            // Regardless of which character it is, add it to the subexpression
+            subexpression += expression![i];
+            // If the current character is an open paren, increment the parenIndicator
+            // Else if the current character is a closing paren, decrement the parenIndicator.
+            if (expression![i] == '(') {
+              parenIndicator++;
+            } else if (expression![i] == ')' ||
+                (expression![i] == ')' && parenIndicator == 1)) {
+              parenIndicator--;
+            }
+
+            i++;
+          }
+        }
+
+        i++;
         CalculatorTree subTree = CalculatorTree(subexpression);
         subTree.generateTree();
         nodeStack.push(subTree.root!);
