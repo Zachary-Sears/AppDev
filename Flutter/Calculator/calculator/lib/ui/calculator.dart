@@ -55,6 +55,17 @@ class CalculatorState extends ChangeNotifier {
       currentDisplayText += newCharacter;
     }
 
+    if (currentDisplayText.length > 15) {
+      Fluttertoast.showToast(msg: 'Cannot enter more than 15 characters',
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.deepPurple,
+      textColor: Colors.grey);
+
+      currentDisplayText = currentDisplayText.substring(0, 15);
+    }
+
     notifyListeners();
   }
 
