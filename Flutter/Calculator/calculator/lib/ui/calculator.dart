@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -55,10 +56,10 @@ class CalculatorState extends ChangeNotifier {
       currentDisplayText += newCharacter;
     }
 
-    if (currentDisplayText.length > 15) {
+    if (currentDisplayText.length > 20) {
       Fluttertoast.showToast(
-        msg: 'Cannot enter more than 15 characters',
-        toastLength: Toast.LENGTH_LONG,
+        msg: 'Cannot enter more than 20 characters',
+        toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.deepPurple,
@@ -142,21 +143,24 @@ class Display extends StatelessWidget {
     var displayAppState = context.watch<CalculatorState>();
     var currentDisplayText = displayAppState.currentDisplayText;
 
-    return Container(
-      child: Padding(
-        padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
-        child: Align(
-          alignment: AlignmentGeometry.centerRight,
-          child: AutoSizeText(
-            currentDisplayText,
-            style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
-            minFontSize: 40,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+    return Padding(
+      padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
+      child: Container(
+        constraints: BoxConstraints(minWidth: 411, minHeight: 110),
+        child: Center(
+          child: Align(
+            alignment: AlignmentGeometry.centerRight,
+            child: AutoSizeText(
+              currentDisplayText,
+              style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
+              minFontSize: 35,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ),
-    constraints: BoxConstraints(minWidth: 5, maxWidth: 5, minHeight: 5, maxHeight: 5),);
+    );
   }
 }
 
