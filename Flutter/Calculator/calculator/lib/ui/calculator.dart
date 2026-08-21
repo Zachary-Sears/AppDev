@@ -56,12 +56,14 @@ class CalculatorState extends ChangeNotifier {
     }
 
     if (currentDisplayText.length > 15) {
-      Fluttertoast.showToast(msg: 'Cannot enter more than 15 characters',
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.deepPurple,
-      textColor: Colors.grey);
+      Fluttertoast.showToast(
+        msg: 'Cannot enter more than 15 characters',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.deepPurple,
+        textColor: Colors.grey,
+      );
 
       currentDisplayText = currentDisplayText.substring(0, 15);
     }
@@ -140,19 +142,21 @@ class Display extends StatelessWidget {
     var displayAppState = context.watch<CalculatorState>();
     var currentDisplayText = displayAppState.currentDisplayText;
 
-    return Padding(
-      padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
-      child: Align(
-        alignment: AlignmentGeometry.centerRight,
-        child: AutoSizeText(
-          currentDisplayText,
-          style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
-          minFontSize: 40,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+    return Container(
+      child: Padding(
+        padding: EdgeInsetsGeometry.fromLTRB(15, 150, 15, 0),
+        child: Align(
+          alignment: AlignmentGeometry.centerRight,
+          child: AutoSizeText(
+            currentDisplayText,
+            style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
+            minFontSize: 40,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
-    );
+    constraints: BoxConstraints(minWidth: 5, maxWidth: 5, minHeight: 5, maxHeight: 5),);
   }
 }
 
