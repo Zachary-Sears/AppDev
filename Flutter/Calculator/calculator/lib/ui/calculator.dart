@@ -113,6 +113,18 @@ class _CalculatorState extends State<Calculator> {
     return ChangeNotifierProvider(
       create: (context) => CalculatorState(),
       child: MaterialApp(
+        title: 'Simple Calculator',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+          brightness: Brightness.dark,
+          textTheme: TextTheme(
+            displayLarge: const TextStyle(
+              fontSize: 75,
+              fontWeight: FontWeight.normal,
+              fontFamily: 'NanumGothicCoding',
+            ),
+          ),
+        ),
         home: Scaffold(
           body: Expanded(
             child: Column(
