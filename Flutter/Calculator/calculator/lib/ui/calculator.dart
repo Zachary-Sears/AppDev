@@ -115,11 +115,18 @@ class _CalculatorState extends State<Calculator> {
       child: MaterialApp(
         title: 'Simple Calculator',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-          brightness: Brightness.dark,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.purpleAccent,
+            brightness: Brightness.dark,
+          ),
           textTheme: TextTheme(
             displayLarge: const TextStyle(
               fontSize: 75,
+              fontWeight: FontWeight.normal,
+              fontFamily: 'NanumGothicCoding',
+            ),
+            displayMedium: const TextStyle(
+              fontSize: 50,
               fontWeight: FontWeight.normal,
               fontFamily: 'NanumGothicCoding',
             ),
@@ -202,16 +209,15 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
                 ),
                 child: Text(
                   'C',
-                  style: TextStyle(
-                    fontSize: 75,
-                    fontFamily: 'NanumGothicCoding',
+                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ),
