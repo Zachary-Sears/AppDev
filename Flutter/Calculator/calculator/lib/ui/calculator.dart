@@ -115,20 +115,17 @@ class _CalculatorState extends State<Calculator> {
       child: MaterialApp(
         title: 'Simple Calculator',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.purpleAccent,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.deepPurple,
             brightness: Brightness.dark,
           ),
+          scaffoldBackgroundColor: Colors.grey,
           textTheme: TextTheme(
             displayLarge: const TextStyle(
               fontSize: 75,
               fontWeight: FontWeight.normal,
               fontFamily: 'NanumGothicCoding',
-            ),
-            displayMedium: const TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.normal,
-              fontFamily: 'NanumGothicCoding',
+              color: Colors.deepPurple,
             ),
           ),
         ),
@@ -138,7 +135,7 @@ class _CalculatorState extends State<Calculator> {
               children: [
                 Display(),
                 Divider(
-                  color: Colors.deepPurple,
+                  color: Colors.deepPurpleAccent,
                   indent: 15,
                   endIndent: 15,
                   thickness: 2.5,
@@ -171,7 +168,14 @@ class Display extends StatelessWidget {
             alignment: AlignmentGeometry.centerRight,
             child: AutoSizeText(
               currentDisplayText,
-              style: TextStyle(fontSize: 75, fontFamily: 'NanumGothicCoding'),
+              style: TextStyle(
+                fontSize: 75,
+                fontFamily: 'NanumGothicCoding',
+                color: Colors.deepPurple,
+              ),
+              // style: Theme.of(context).textTheme.displayLarge!.copyWith(
+              //   color: Theme.of(context).colorScheme.onPrimary,
+              // ),
               minFontSize: 35,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -197,27 +201,23 @@ class ButtonMatrix extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  buttonMatrixAppState.clearDisplayText();
-                  buttonMatrixAppState.clearResult();
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.resolveWith<Color?>((
-                    Set<WidgetState> states,
-                  ) {
-                    if (states.contains(WidgetState.pressed)) {
-                      return Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 1);
-                    }
-                    return null; // Use the component's default.
-                  }),
+              Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: Colors.deepPurple,
+                    accentColor: Colors.grey,
+                  ),
                 ),
-                child: Text(
-                  'C',
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
+                child: ElevatedButton(
+                  onPressed: () {
+                    buttonMatrixAppState.clearDisplayText();
+                    buttonMatrixAppState.clearResult();
+                  },
+                  child: Text(
+                    'C',
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                   ),
                 ),
               ),
@@ -233,7 +233,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -258,7 +258,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -282,7 +282,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -314,7 +314,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -338,7 +338,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -362,7 +362,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -386,7 +386,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -418,7 +418,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -442,7 +442,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -466,7 +466,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -490,7 +490,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -522,7 +522,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -546,7 +546,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -570,7 +570,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -594,7 +594,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -624,7 +624,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -648,7 +648,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -672,7 +672,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
@@ -696,7 +696,7 @@ class ButtonMatrix extends StatelessWidget {
                     if (states.contains(WidgetState.pressed)) {
                       return Theme.of(
                         context,
-                      ).colorScheme.primary.withValues(alpha: 0.5);
+                      ).colorScheme.primary.withValues(alpha: 1);
                     }
                     return null; // Use the component's default.
                   }),
