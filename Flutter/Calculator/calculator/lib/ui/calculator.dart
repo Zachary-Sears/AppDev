@@ -115,7 +115,7 @@ class _CalculatorState extends State<Calculator> {
         title: 'Simple Calculator',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.deepPurple,
+            primarySwatch: Colors.blueGrey,
             brightness: Brightness.dark,
           ),
           scaffoldBackgroundColor: Colors.grey,
@@ -200,23 +200,29 @@ class ButtonMatrix extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.fromSwatch(
-                    primarySwatch: Colors.deepPurple,
-                    accentColor: Colors.grey,
-                  ),
+              ElevatedButton(
+                onPressed: () {
+                  buttonMatrixAppState.clearDisplayText();
+                  buttonMatrixAppState.clearResult();
+                },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.resolveWith<Color?>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 1);
+                    }
+                    return null;
+                  }),
                 ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    buttonMatrixAppState.clearDisplayText();
-                    buttonMatrixAppState.clearResult();
-                  },
-                  child: Text(
-                    'C',
-                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                child: Text(
+                  'C',
+                  style: TextStyle(
+                    fontSize: 75,
+                    fontFamily: 'NanumGothicCoding',
+                    color: Colors.redAccent,
                   ),
                 ),
               ),
