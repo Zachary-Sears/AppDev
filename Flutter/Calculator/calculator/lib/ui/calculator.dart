@@ -14,7 +14,7 @@ class Calculator extends StatefulWidget {
 
 class CalculatorState extends ChangeNotifier {
   var currentDisplayText = ''; //Currently displayed text
-  double result = 0; //Calculation result
+  num result = 0; //Calculation result
   int parenIndicator =
       0; //A count of how many currently open parenthesis pairs occur in the expression
 
@@ -22,10 +22,18 @@ class CalculatorState extends ChangeNotifier {
     if (newCharacter == '=') {
       if (currentDisplayText.isEmpty) {
         currentDisplayText = '0=0';
+      } else if (currentDisplayText == "0=0") {
+        // If user repeatedly enters an empty string, do nothing
+      } else if (currentDisplayText.contains('=')) {
+        // TODO: Repeat operation with result in place of first operand.
+        // i.e. 4*3=12 -> 12*3=36
       } else {
         CalculatorTree tree = CalculatorTree(currentDisplayText);
         tree.generateTree();
         result = tree.evaluate();
+        if (result % 1 == 0) {
+          result = result.truncate();
+        }
         currentDisplayText += newCharacter;
         currentDisplayText += result.toString();
       }
@@ -196,7 +204,7 @@ class ButtonMatrix extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -304,7 +312,7 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -408,7 +416,7 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -512,7 +520,7 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -616,7 +624,7 @@ class ButtonMatrix extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.fromLTRB(15, 5, 15, 5),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
