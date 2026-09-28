@@ -21,6 +21,11 @@ The format is based on [Keep a Changelog]
 ### Changed
 
 - v0.3 Restructuring project to encourage better file mangement and ease of development.
+- v0.3 Updated '/calculator/pubspec.lock' packages and sha256 codes
+    - characters version: 1.4.1
+    - matcher version: 0.12.18
+    - material_color_utilities version: 0.13.0
+    - test_api version: 0.7.9
 
 ## [0.2.7] - 2026-08-20
 
