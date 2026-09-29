@@ -2,8 +2,6 @@ import 'package:calculator/ui/calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-enum ButtonLabels {C, (Icons.backspace)}
-
 class Btnmatrix extends StatelessWidget {
   const Btnmatrix({super.key});
 
@@ -38,9 +36,9 @@ class button extends StatelessWidget {
         if (states.contains(WidgetState.pressed)) {
           return Theme.of(
             context,
-          ).colorScheme.secondary.withValues(alpha: 1);
+          ).colorScheme.onSurface.withValues(alpha: 1);
         }
-        return null;
+        return Theme.of(context).colorScheme.surface;
       }),
     ),
     child: Text(character, style: TextTheme.of(context).displayMedium));
