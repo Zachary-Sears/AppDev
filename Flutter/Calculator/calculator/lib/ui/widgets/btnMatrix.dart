@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Btnmatrix extends StatelessWidget {
-  const Btnmatrix({super.key});
+  Btnmatrix({super.key});
+
+  var btnLabels = {"C", "", "()", "/", "1", "2", "3", "*", "4", "5", "6", "-", "7", "8", "9", "+", "+/-", "0", ".", "="};
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class Btnmatrix extends StatelessWidget {
     return GridView.count(crossAxisCount: 4,
     children: List.generate(20, ((index) {
       return Center(
-        child: button(character: 'C'),
+        child: index == 1? button(child: Text(btnLabels.elementAt(index))) : button(child: Icon(Icons.backspace, size: 50,)),
       );
     }),)
   );}
@@ -19,9 +21,9 @@ class Btnmatrix extends StatelessWidget {
 
 class button extends StatelessWidget {
   const button({super.key,
-    required this.character});
+    required this.child});
 
-    final String character;
+    final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class button extends StatelessWidget {
         return Theme.of(context).colorScheme.surface;
       }),
     ),
-    child: Text(character, style: TextTheme.of(context).displayMedium));
+    child: child,
+    );
   }
 }
