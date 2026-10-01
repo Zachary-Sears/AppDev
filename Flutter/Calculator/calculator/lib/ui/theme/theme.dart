@@ -8,6 +8,12 @@ abstract final class AppTheme {
       fontFamily: 'NanumGothicCoding',
       color: AppColors.textColor,
     ),
+    displaySmall: TextStyle(
+      fontSize: 50,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'NanumGothicCoding',
+      color: AppColors.textColor,
+    ),
   );
 
   static ThemeData themeData = ThemeData(
