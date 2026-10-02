@@ -7,7 +7,7 @@ class Btnmatrix extends StatelessWidget {
 
   var btnLabels = {
     "C",
-    "",
+    "", // Intentionally empty for indexing purposes, backspace icon in place of string label.
     "()",
     "/",
     "1",
@@ -41,13 +41,20 @@ class Btnmatrix extends StatelessWidget {
               ? Button(
                   childWidget: Text(
                     btnLabels.elementAt(index),
+                    style: TextTheme.of(context).displayMedium,
+                  ),
+                )
+              : index == 16
+              ? Button(
+                  childWidget: Text(
+                    btnLabels.elementAt(index),
                     style: TextTheme.of(context).displaySmall,
                   ),
                 )
               : Button(
                   childWidget: Text(
                     btnLabels.elementAt(index),
-                    style: TextTheme.of(context).displayMedium,
+                    style: TextTheme.of(context).displayLarge,
                   ),
                 ),
         );

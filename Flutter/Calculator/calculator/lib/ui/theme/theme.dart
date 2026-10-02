@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 
 abstract final class AppTheme {
   static const textTheme = TextTheme(
-    displayMedium: TextStyle(
+    displayLarge: TextStyle(
       fontSize: 75,
       fontWeight: FontWeight.w500,
       fontFamily: 'NanumGothicCoding',
       color: AppColors.textColor,
     ),
-    displaySmall: TextStyle(
+    displayMedium: TextStyle(
       fontSize: 50,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'NanumGothicCoding',
+      color: AppColors.textColor,
+    ),
+    displaySmall: TextStyle(
+      fontSize: 35,
       fontWeight: FontWeight.w500,
       fontFamily: 'NanumGothicCoding',
       color: AppColors.textColor,
@@ -50,5 +56,7 @@ abstract final class AppColors {
 abstract final class AppSpacing {
   static const double btnMatrixHorizontal = 15;
   static const double btnMatrixVertical = 5;
-  static const double padding = 15;
+  static const double displayHorizpadding = 15;
+  static const double displayTopPadding = 150;
+  static const double displayBottomPadding = 0;
 }

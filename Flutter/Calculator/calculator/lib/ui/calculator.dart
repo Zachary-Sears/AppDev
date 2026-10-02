@@ -140,7 +140,7 @@ class _CalculatorState extends State<Calculator> {
           body: Expanded(
             child: Column(
               children: [
-                Display(),
+                CalcDisplay(),
                 Divider(
                   color: Colors.deepPurpleAccent,
                   indent: 15,
@@ -158,8 +158,8 @@ class _CalculatorState extends State<Calculator> {
   }
 }
 
-class Display extends StatelessWidget {
-  const Display({super.key});
+class CalcDisplay extends StatelessWidget {
+  const CalcDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -180,9 +180,6 @@ class Display extends StatelessWidget {
                 fontFamily: 'NanumGothicCoding',
                 color: Colors.deepPurple,
               ),
-              // style: Theme.of(context).textTheme.displayLarge!.copyWith(
-              //   color: Theme.of(context).colorScheme.onPrimary,
-              // ),
               minFontSize: 35,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
