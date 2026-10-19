@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-10-19
+
+This is the final update for this project. Continuing work at this stage for a build file migration I feel is not worth the time. I would rather start a new project and learn about build files to be better prepared for this issue in the future. It would also be easier to create the structure I want to make in a new project with fewer moving parts like all of the platforms being accommodated from the start.
+
 ## [0.3.1] - 2026-10-01
 
 ### Added
