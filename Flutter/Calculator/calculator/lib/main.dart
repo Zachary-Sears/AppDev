@@ -1,4 +1,3 @@
-import 'package:calculator/ui/calculator.dart';
 import 'package:calculator/ui/widgets/btnMatrix.dart';
 import 'package:calculator/ui/widgets/display.dart';
 

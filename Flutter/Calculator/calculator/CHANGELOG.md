@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-01
+
+### Added
+
+- v0.3 Added new button matrix file '/calculator/lib/ui/widgets/btnMatrix.dart' to generate matrix and handle on pressed logic.
+
+
+
 ## [0.3.0] - 2026-09-28
 
 0.3.0 is the second minor revision focused on proper project documentation, project structure, and project architecture. A second objective of this revision is to build a global theme for the app and condense code to drastically reduce redundant code and leverage Flutter theming and design systems.
@@ -39,8 +47,6 @@ The format is based on [Keep a Changelog]
 
 - v0.2 Added parenthesis insertion and evaluation
 - v0.2 Added display text widget that dynamically changes the font size as the string gets longer.
-
-### Added
 
 ## [0.2.5] - 2026-04-10
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 import '../services/calculator_tree.dart';
 
@@ -64,14 +64,14 @@ class CalculatorState extends ChangeNotifier {
     }
 
     if (currentDisplayText.length > 20) {
-      Fluttertoast.showToast(
-        msg: 'Cannot enter more than 20 characters',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.deepPurple,
-        textColor: Colors.grey,
-      );
+      // Fluttertoast.showToast(
+      //   msg: 'Cannot enter more than 20 characters',
+      //   toastLength: Toast.LENGTH_SHORT,
+      //   gravity: ToastGravity.BOTTOM,
+      //   timeInSecForIosWeb: 1,
+      //   backgroundColor: Colors.deepPurple,
+      //   textColor: Colors.grey,
+      // );
 
       currentDisplayText = currentDisplayText.substring(0, 15);
     }
