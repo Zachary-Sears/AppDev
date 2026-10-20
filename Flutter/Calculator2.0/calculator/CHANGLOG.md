@@ -11,18 +11,18 @@ The format is based on [Keep a Changelog]
 
 A new project created to begin the project fresh and implement a recommended file and project structure to leverage proper Flutter programming conventions.
 
-project
-|
---- lib
-  ---- main.dart
-  |
-  --- services
-  |
-  --- ui
-    |
-    --- theme
-    |
-    --- widgets
+project<br>
+|<br>
+--- lib<br>
+  ---- main.dart<br>
+  |<br>
+  --- services<br>
+  |<br>
+  --- ui<br>
+    |<br>
+    --- theme<br>
+    |<br>
+    --- widgets<br>
 
 ### Added
 
