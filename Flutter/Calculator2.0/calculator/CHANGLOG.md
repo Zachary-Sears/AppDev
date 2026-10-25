@@ -7,22 +7,16 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
-## [0.1.0] - 20260-10-19
+## [0.1.1] - 2026-10-24
+
+### Added
+
+-v0.1 Created the button matrix file and just copied the contents over from the last project, minus some currently unecessary import statements.
+-v0.1 Created a global theme file, which is also copied from the previous project.
+
+## [0.1.0] - 2026-10-19
 
 A new project created to begin the project fresh and implement a recommended file and project structure to leverage proper Flutter programming conventions.
-
-project<br>
-|<br>
---- lib<br>
-  ---- main.dart<br>
-  |<br>
-  --- services<br>
-  |<br>
-  --- ui<br>
-    |<br>
-    --- theme<br>
-    |<br>
-    --- widgets<br>
 
 ### Added
 
