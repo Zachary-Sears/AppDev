@@ -1,4 +1,4 @@
-import 'package:calculator/ui/widgets/btnMatrix.dart';
+import 'package:calculator/ui/display/widgets/btnMatrix.dart';
 import 'package:flutter/material.dart';
 import 'ui/theme/theme.dart';
 

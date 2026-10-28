@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.1.1.1] - 2026-10-27
+
+### Changed
+
+- v0.1 Moved files related to the display ui of the calculator, such as the button matrix and the expression display into a new folder: ui/display/. This is where the view models and models will live for the display as well once they are written.
+
 ## [0.1.1] - 2026-10-24
 
 ### Added
