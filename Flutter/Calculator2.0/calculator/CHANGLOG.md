@@ -7,7 +7,12 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
-## [0.1.1.1] - 2026-10-27
+## [0.1.2] - 2026-10-27
+
+### Added
+
+- v0.1 Created the start of a calculator model to pass the data between the view model of the calculator and the expression tree generator/evaluator.
+- v0.1 New file to contain the calculator display and the state of the calculator.
 
 ### Changed
 
