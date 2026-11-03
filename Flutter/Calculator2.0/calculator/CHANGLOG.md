@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
+## [0.1.2.1] - 2026-11-02
+
+### Added
+
+-v0.1 Added linux development target in preparation for migration and switch to linux.
+
 ## [0.1.2] - 2026-10-27
 
 ### Added
