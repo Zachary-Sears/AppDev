@@ -7,6 +7,19 @@ The format is based on [Keep a Changelog]
 
 ## [Unreleased]
 
+- History page which holds previous expressions and their respective results.
+
+## [0.1.3] - 2026-11-5
+
+### Added
+
+- v0.1 Provider package to gain access to change notifier and change notifier provider.
+- v0.1 Button matrix is fully functional, displaying to the UI and communicating with the app model.
+
+### Changed
+
+- v0.1 Changed top level widget from stateless to stateful widget to add change notifier provider and to create an app state class.
+
 ## [0.1.2.1] - 2026-11-02
 
 ### Added

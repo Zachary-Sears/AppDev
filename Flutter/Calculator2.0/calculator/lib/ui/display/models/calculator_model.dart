@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CalculatorModel extends ChangeNotifier {
-  String displayText = '';
+  var displayText = '';
   num result = 0;
 
   int parenIndicator = 0;
 
   void updateDisplayText(String newCharacter) {
+    
     if (newCharacter == '=') {
       if (displayText.isEmpty) {
         displayText = '0=0';
@@ -21,6 +22,11 @@ class CalculatorModel extends ChangeNotifier {
         // Generate and evaluate the tree.
       }
     } else if (newCharacter == '(') {
+      /*
+       * Add open paren when:
+       *  the display text is empty
+       *  the previous character is an operator
+       */
       if (parenIndicator > 0) {
         if (displayText.isEmpty) {
           displayText += '(';
@@ -37,6 +43,10 @@ class CalculatorModel extends ChangeNotifier {
         displayText += '(';
         parenIndicator ++;
       }
+    } else if (newCharacter == 'C') {
+      clearDisplayText();
+    } else if (newCharacter == 'b') {
+      backspace();
     } else {
       displayText += newCharacter;
     }
@@ -47,6 +57,9 @@ class CalculatorModel extends ChangeNotifier {
 
       displayText = displayText.substring(0, 20);
     }
+    // print(newCharacter); 
+    // print(displayText);
+    // TODO: Try to figure out logging systems on this for future reference.
 
     notifyListeners();
   }
@@ -54,11 +67,8 @@ class CalculatorModel extends ChangeNotifier {
   void clearDisplayText() {
     displayText = '';
     parenIndicator = 0;
-    notifyListeners();
-  }
-
-  void clearResult() {
     result = 0;
+    notifyListeners();
   }
 
   void backspace() {
