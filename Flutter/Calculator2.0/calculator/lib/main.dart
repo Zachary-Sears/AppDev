@@ -1,3 +1,4 @@
+import 'package:calculator/ui/display/widgets/calc_display.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,15 @@ class _CalculatorContainerState extends State<CalculatorContainer> {
       child: MaterialApp(
         title: 'Calculator 2.0',
         theme: AppTheme.themeData,
-        home: Scaffold(body: BtnMatrix(),)
+        home: Scaffold(
+          body: SafeArea(
+            child: Column(
+              children: [
+                CalculatorDisplay(),
+                BtnMatrix()
+                ],),
+            ),
+          )
         )
     );
   }

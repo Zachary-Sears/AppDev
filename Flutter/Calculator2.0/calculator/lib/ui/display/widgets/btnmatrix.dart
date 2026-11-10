@@ -31,7 +31,8 @@ class BtnMatrix extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return GridView.count(
+    return Expanded(
+      child: GridView.count(
       crossAxisCount: 4,
       children: List.generate(20, ((index) {
         return Center(
@@ -59,7 +60,7 @@ class BtnMatrix extends StatelessWidget {
                  index: index),
         );
       })),
-    );
+    ));
   }
 }
 
