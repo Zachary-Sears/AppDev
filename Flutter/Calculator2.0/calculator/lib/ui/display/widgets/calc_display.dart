@@ -13,8 +13,10 @@ class CalculatorDisplay extends StatelessWidget {
 
     var currentDisplayText = displayAppState.displayText;
 
-    return Container(
-        constraints: BoxConstraints(minWidth: 411, minHeight: 110),
+    return Padding(
+      padding: EdgeInsetsGeometry.fromLTRB(AppSpacing.displayHorizPadding, AppSpacing.displayTopPadding, AppSpacing.displayHorizPadding, AppSpacing.displayBottomPadding),
+      child: Container(
+        constraints: BoxConstraints(minWidth: AppSpacing.displayHeight, minHeight: AppSpacing.displayWidth),
         child: Center(
           child: Align(
             alignment: AlignmentGeometry.centerRight,
@@ -24,9 +26,10 @@ class CalculatorDisplay extends StatelessWidget {
               minFontSize: 35,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              ),
             ),
           ),
-        );
+        ),
+      ),
+    );
   }
 }

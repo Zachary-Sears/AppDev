@@ -30,7 +30,7 @@ abstract final class AppTheme {
 }
 
 abstract final class AppColors {
-  static const background = Colors.blueGrey;
+  static const background = Color.fromARGB(255, 51, 51, 51);
   static const onBackground = Colors.white;
   static const primaryColor = Colors.grey;
   static const onPrimaryColor = Colors.black;
@@ -54,9 +54,18 @@ abstract final class AppColors {
 }
 
 abstract final class AppSpacing {
+  // Padding values
   static const double btnMatrixHorizontal = 15;
   static const double btnMatrixVertical = 5;
-  static const double displayHorizpadding = 15;
-  static const double displayTopPadding = 150;
+  static const double displayHorizPadding = 15;
+  static const double displayTopPadding = 0;
   static const double displayBottomPadding = 0;
+
+  static const double displayDividerIndent = 15;
+
+  // Constraints
+  static const double displayHeight = 411;
+  static const double displayWidth = 110;
+  
+  static const double displayDividerThickness = 2.5;
 }

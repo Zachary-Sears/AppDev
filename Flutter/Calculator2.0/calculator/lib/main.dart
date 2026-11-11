@@ -1,4 +1,5 @@
 import 'package:calculator/ui/display/widgets/calc_display.dart';
+import 'package:calculator/ui/display/widgets/display_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,8 +29,11 @@ class _CalculatorContainerState extends State<CalculatorContainer> {
         home: Scaffold(
           body: SafeArea(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                DisplayDivider(),
                 CalculatorDisplay(),
+                DisplayDivider(),
                 BtnMatrix()
                 ],),
             ),

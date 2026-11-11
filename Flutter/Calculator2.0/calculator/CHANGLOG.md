@@ -9,6 +9,17 @@ The format is based on [Keep a Changelog]
 
 - History page which holds previous expressions and their respective results.
 
+## [0.1.4] - 2026-11-10
+
+### Added
+
+- v0.1 Display divider class to created divider lines to differentiate where the display text box is on the screen.
+- v0.1 Calculator display which communicates with the calculator model to display the text of the current expression and/or equation.
+
+### Changed
+
+- v0.1 Ongoing modification of the app's theme values.
+
 ## [0.1.3] - 2026-11-5
 
 ### Added
