@@ -9,6 +9,17 @@ The format is based on [Keep a Changelog]
 
 - History page which holds previous expressions and their respective results.
 
+## [0.2.0] - 2026-11-14
+
+### Added
+
+- v0.1 Expression tree generator and evaluator for calculating results and displaying them to the UI.
+- v0.1 Repeatable operations via pressing '=' directly after evaluating an expression.
+
+### Changed
+
+- v0.1 Methods which are intended to be private to their classes have had their accessibility modified to increase security across classes.
+
 ## [0.1.4] - 2026-11-10
 
 ### Added
@@ -35,7 +46,7 @@ The format is based on [Keep a Changelog]
 
 ### Added
 
--v0.1 Added linux development target in preparation for migration and switch to linux.
+- v0.1 Added linux development target in preparation for migration and switch to linux.
 
 ## [0.1.2] - 2026-10-27
 
@@ -52,8 +63,8 @@ The format is based on [Keep a Changelog]
 
 ### Added
 
--v0.1 Created the button matrix file and just copied the contents over from the last project, minus some currently unecessary import statements.
--v0.1 Created a global theme file, which is also copied from the previous project.
+- v0.1 Created the button matrix file and just copied the contents over from the last project, minus some currently unecessary import statements.
+- v0.1 Created a global theme file, which is also copied from the previous project.
 
 ## [0.1.0] - 2026-10-19
 
