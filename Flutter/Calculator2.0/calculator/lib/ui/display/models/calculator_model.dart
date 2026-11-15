@@ -9,8 +9,8 @@ class CalculatorModel extends ChangeNotifier {
   int parenIndicator = 0;
 
   void updateDisplayText(String newCharacter) {
-    
     if (newCharacter == '=') {
+      // TODO: Add clause to check if expression string is valid for evaluation.    
       if (displayText.isEmpty) {
         displayText = "0=0";
       } else if (displayText == "0=0") {

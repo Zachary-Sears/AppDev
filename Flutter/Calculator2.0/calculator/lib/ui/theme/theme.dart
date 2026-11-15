@@ -30,7 +30,7 @@ abstract final class AppTheme {
 }
 
 abstract final class AppColors {
-  static const background = Color.fromARGB(255, 51, 51, 51);
+  static const background = Color.fromARGB(255, 97, 97, 97);
   static const onBackground = Colors.white;
   static const primaryColor = Colors.grey;
   static const onPrimaryColor = Colors.black;
