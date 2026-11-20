@@ -30,8 +30,8 @@ abstract final class AppTheme {
 }
 
 abstract final class AppColors {
-  static const background = Color.fromARGB(255, 97, 97, 97);
-  static const onBackground = Colors.white;
+  static const surface = Color.fromARGB(255, 97, 97, 97);
+  static const onSurface = Colors.white;
   static const primaryColor = Colors.grey;
   static const onPrimaryColor = Colors.black;
   static const secondaryColor = Colors.deepPurple;
@@ -46,8 +46,8 @@ abstract final class AppColors {
     onPrimary: AppColors.onPrimaryColor,
     secondary: AppColors.secondaryColor,
     onSecondary: AppColors.onSecondaryColor,
-    surface: AppColors.background,
-    onSurface: AppColors.onBackground,
+    surface: AppColors.surface,
+    onSurface: AppColors.onSurface,
     error: AppColors.errorColor,
     onError: AppColors.onErrorColor,
   );

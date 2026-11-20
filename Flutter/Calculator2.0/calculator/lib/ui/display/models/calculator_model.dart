@@ -5,21 +5,25 @@ import 'package:flutter/material.dart';
 class CalculatorModel extends ChangeNotifier {
   var displayText = '';
   num result = 0;
+  int validExpression = 0;
 
   int parenIndicator = 0;
 
   void updateDisplayText(String newCharacter) {
+    validExpression = 0;
     if (newCharacter == '=') {
-      // TODO: Add clause to check if expression string is valid for evaluation.    
-      if (displayText.isEmpty) {
-        displayText = "0=0";
-      } else if (displayText == "0=0") {
-        // if user repeatedly enters an empty string, do nothing.
-      } else if (displayText.contains('=')) {
-        // i.e. 4*3=12 -> 12*3=36
-        _repeatOperation();
-      } else {
-        _treeHandler();
+      validExpression = _validateExpression();
+      if (validExpression == 0) {
+        if (displayText.isEmpty) {
+          displayText = "0=0";
+        } else if (displayText == "0=0") {
+          // if user repeatedly enters an empty string, do nothing.
+        } else if (displayText.contains('=')) {
+          // i.e. 4*3=12 -> 12*3=36
+          _repeatOperation();
+        } else {
+          _treeHandler();
+        }
       }
     } else if (newCharacter == '(') {
       _parenHandler();
@@ -27,6 +31,9 @@ class CalculatorModel extends ChangeNotifier {
       _clearDisplayText();
     } else if (newCharacter == 'b') {
       _backspace();
+    } else if ((_isOperator(newCharacter) || newCharacter == '(') &&
+        displayText.contains('=')) {
+      _continueOperation(newCharacter);
     } else {
       displayText += newCharacter;
     }
@@ -41,16 +48,44 @@ class CalculatorModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _validateExpression() {
+    // Check if the first or last character in the expression is an operator.
+    if (_isOperator(displayText[0]) ||
+        _isOperator(displayText[displayText.length - 1])) {
+      return 1;
+    }
+
+    // Check if two operators are next to each other i.e. '*+'.
+    int i = 1;
+    while (i < displayText.length - 1) {
+      if (_isOperator(displayText[i]) && _isOperator(displayText[i + 1])) {
+        return 2;
+      }
+      i++;
+    }
+
+    // Expression is valid
+    return 0;
+  }
+
+  void _continueOperation(String newCharacter) {
+    String r = _extractResult();
+
+    if (newCharacter == '(') {
+      displayText = '($r, *, $newCharacter)';
+    }
+
+    displayText = r + newCharacter;
+  }
+
   void _repeatOperation() {
-    // Extract subexpressions for result and for first operand.
-    // Find index of '='.
-    int equalIndex = displayText.indexOf('=');
-    // Extract result
-    String r = displayText.substring(equalIndex + 1);
+    int equalIndex = _equalIndex();
+    // Extract result from displayText
+    String r = _extractResult();
     // Find the index of the first operator.
     int index = 0;
     while (!_isOperator(displayText[index])) {
-      index ++;
+      index++;
     }
     // Extract everything except the first operator and the equal sign.
     String secondHalfNewExp = displayText.substring(index, equalIndex);
@@ -73,27 +108,27 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void _parenHandler() {
-      /*
+    /*
        * Add open paren when:
        *  the display text is empty
        *  the previous character is an operator
        */
-      if (parenIndicator > 0) {
-        if (displayText.isEmpty) {
-          displayText += '(';
-          parenIndicator++;
-        } else if (displayText[displayText.length - 1] == '(' ||
-            _isOperator(displayText[displayText.length - 1])) {
-          displayText += '(';
-          parenIndicator ++;
-        } else {
-          displayText += ')';
-          parenIndicator --;
-        }
-      } else {
+    if (parenIndicator > 0) {
+      if (displayText.isEmpty) {
         displayText += '(';
-        parenIndicator ++;
+        parenIndicator++;
+      } else if (displayText[displayText.length - 1] == '(' ||
+          _isOperator(displayText[displayText.length - 1])) {
+        displayText += '(';
+        parenIndicator++;
+      } else {
+        displayText += ')';
+        parenIndicator--;
       }
+    } else {
+      displayText += '(';
+      parenIndicator++;
+    }
   }
 
   void _clearDisplayText() {
@@ -108,17 +143,25 @@ class CalculatorModel extends ChangeNotifier {
       parenIndicator = 0;
     } else {
       if (displayText[displayText.length - 1] == '(') {
-        parenIndicator --;
+        parenIndicator--;
       }
 
       displayText = displayText.substring(0, displayText.length - 1);
     }
   }
 
-  bool _isOperator (String character) {
+  bool _isOperator(String character) {
     return character == '+' ||
-      character == '-' ||
-      character == '*' ||
-      character == '/';
+        character == '-' ||
+        character == '*' ||
+        character == '/';
+  }
+
+  String _extractResult() {
+    return displayText.substring(_equalIndex() + 1);
+  }
+
+  int _equalIndex() {
+    return displayText.indexOf('=');
   }
 }

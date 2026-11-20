@@ -9,16 +9,28 @@ The format is based on [Keep a Changelog]
 
 - History page which holds previous expressions and their respective results.
 
+## [0.2.1] - 2026-11-19
+
+### Added
+
+- v0.2 Expression validation to model file.
+- v0.2 Snackbar, or toast, notifications to button matrix for user notification about invalid expressions.
+- v0.2 Option to continue operations from a result.
+
+### Changed
+
+- v0.2 App theme color labels from backgound to surface and onBackground to onSurface to avoid deprecation confusion.
+
 ## [0.2.0] - 2026-11-14
 
 ### Added
 
-- v0.1 Expression tree generator and evaluator for calculating results and displaying them to the UI.
-- v0.1 Repeatable operations via pressing '=' directly after evaluating an expression.
+- v0.2 Expression tree generator and evaluator for calculating results and displaying them to the UI.
+- v0.2 Repeatable operations via pressing '=' directly after evaluating an expression.
 
 ### Changed
 
-- v0.1 Methods which are intended to be private to their classes have had their accessibility modified to increase security across classes.
+- v0.2 Methods which are intended to be private to their classes have had their accessibility modified to increase security across classes.
 
 ## [0.1.4] - 2026-11-10
 

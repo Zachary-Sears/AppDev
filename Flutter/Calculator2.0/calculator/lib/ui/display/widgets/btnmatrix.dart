@@ -92,6 +92,34 @@ class Button extends StatelessWidget {
             ? 'n' // Negate value
             : btnLabels.elementAt(index); // All other characters
         btnMatrixAppState.updateDisplayText(character);
+
+        int validExpression = btnMatrixAppState.validExpression;
+
+        if (validExpression == 1) {
+          final startEndSnackBar = SnackBar(
+            content: const Text(
+              'Expression Invalid: Cannot start or end with operator',
+            ),
+            behavior: .floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(10),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.onSurface,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(startEndSnackBar);
+        } else if (validExpression == 2) {
+          final doubleOpSnackBar = SnackBar(
+            content: const Text(
+              'Expression Invalid: Operator cannot follow Operator',
+            ),
+            behavior: .floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(10),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.onSurface,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(doubleOpSnackBar);
+        }
       },
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith<Color?>((
