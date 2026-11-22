@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog]
 
 - v0.2 Logic bug in _repeatOperation() correcting for unhandled leading parentheses. Now carries them through the operation to preserve order of operations.
 
+### Changed
+
+- v0.2 Replaced String contenation with interpolation in _continueOperation() and _repeatOperation().
+
 ## [0.2.1] - 2026-11-19
 
 ### Added
