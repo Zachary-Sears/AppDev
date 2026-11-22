@@ -25,16 +25,16 @@ class CalculatorModel extends ChangeNotifier {
           _treeHandler();
         }
       }
+    } else if ((_isOperator(newCharacter) || newCharacter == '(') &&
+        displayText.contains('=')) {
+      _continueOperation(newCharacter);
     } else if (newCharacter == '(') {
       _parenHandler();
     } else if (newCharacter == 'C') {
       _clearDisplayText();
     } else if (newCharacter == 'b') {
       _backspace();
-    } else if ((_isOperator(newCharacter) || newCharacter == '(') &&
-        displayText.contains('=')) {
-      _continueOperation(newCharacter);
-    } else {
+    }  else {
       displayText += newCharacter;
     }
 
@@ -72,10 +72,11 @@ class CalculatorModel extends ChangeNotifier {
     String r = _extractResult();
 
     if (newCharacter == '(') {
-      displayText = '($r, *, $newCharacter)';
+      displayText = '$r*$newCharacter';
+      parenIndicator ++;
+    } else {
+      displayText = '$r$newCharacter';
     }
-
-    displayText = r + newCharacter;
   }
 
   void _repeatOperation() {
@@ -84,12 +85,17 @@ class CalculatorModel extends ChangeNotifier {
     String r = _extractResult();
     // Find the index of the first operator.
     int index = 0;
+    String leadingParens = '';
     while (!_isOperator(displayText[index])) {
+      if (displayText[index] == '(') {
+        leadingParens += '(';
+      }
+
       index++;
     }
     // Extract everything except the first operator and the equal sign.
     String secondHalfNewExp = displayText.substring(index, equalIndex);
-    displayText = r + secondHalfNewExp;
+    displayText ='$leadingParens$r$secondHalfNewExp';
     _treeHandler();
   }
 
@@ -103,8 +109,7 @@ class CalculatorModel extends ChangeNotifier {
       result = result.truncate();
     }
 
-    displayText += '=';
-    displayText += result.toString();
+    displayText += '=$result';
   }
 
   void _parenHandler() {

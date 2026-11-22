@@ -9,6 +9,12 @@ The format is based on [Keep a Changelog]
 
 - History page which holds previous expressions and their respective results.
 
+## [0.2.1.1] - 2026-11-22
+
+### Fixed
+
+- v0.2 Logic bug in _repeatOperation() correcting for unhandled leading parentheses. Now carries them through the operation to preserve order of operations.
+
 ## [0.2.1] - 2026-11-19
 
 ### Added
