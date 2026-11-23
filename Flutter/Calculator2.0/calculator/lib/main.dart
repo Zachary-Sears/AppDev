@@ -1,10 +1,11 @@
 import 'package:calculator/ui/display/widgets/calc_display.dart';
 import 'package:calculator/ui/display/widgets/display_divider.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
 import 'package:calculator/ui/display/models/calculator_model.dart';
-import 'package:calculator/ui/display/widgets/btnMatrix.dart';
+import 'package:calculator/ui/display/widgets/btnmatrix.dart';
 import 'ui/theme/theme.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:calculator/ui/display/models/calculator_model.dart';
 import 'package:calculator/ui/theme/theme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorDisplay extends StatelessWidget {

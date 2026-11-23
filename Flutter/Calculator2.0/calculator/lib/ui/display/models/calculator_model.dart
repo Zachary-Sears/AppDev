@@ -1,6 +1,6 @@
 import 'package:calculator/services/calc_tree_generator.dart';
 import 'package:calculator/services/tree_evaluator.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CalculatorModel extends ChangeNotifier {
   String displayText = '';

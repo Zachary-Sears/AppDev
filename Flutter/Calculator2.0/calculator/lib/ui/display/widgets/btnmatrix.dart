@@ -1,5 +1,5 @@
 import 'package:calculator/ui/display/models/calculator_model.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
 const Set<String> btnLabels = {
