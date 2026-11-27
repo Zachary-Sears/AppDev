@@ -9,6 +9,16 @@ The format is based on [Keep a Changelog]
 
 - History page which holds previous expressions and their respective results.
 
+## [0.3.1] - 2026-11-27
+
+### Added
+
+- v0.3 Added a new light theme incorporating lighter grey colors.
+
+### Changed
+
+- v0.3 Changed the button surface color to a grey purple color.
+
 ## [0.3.0] - 2026-11-22
 
 This minor version update marks the move over to Linux from Windows for development. This came with a number of service upgrades that I was unaware of and deprecations which needed to be resolved. In the future, I will work to keep these systems up to date and upgrade when necessary. Each update will likely signal an increment in the minor version, unless the change is significant enough in which case, a major version change will reflect the incompatibility between versions.

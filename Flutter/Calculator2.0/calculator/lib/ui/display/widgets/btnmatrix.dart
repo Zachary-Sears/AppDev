@@ -126,9 +126,9 @@ class Button extends StatelessWidget {
           Set<WidgetState> states,
         ) {
           if (states.contains(WidgetState.pressed)) {
-            return Theme.of(context).colorScheme.onSurface.withValues(alpha: 1);
+            return Theme.of(context).colorScheme.onSecondary.withValues(alpha: 1);
           }
-          return Theme.of(context).colorScheme.surface;
+          return Theme.of(context).colorScheme.secondary;
         }),
       ),
       child: childWidget,

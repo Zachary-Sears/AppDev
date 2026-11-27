@@ -29,12 +29,41 @@ abstract final class AppTheme {
   );
 }
 
+abstract final class AppThemeLight {
+  static const textTheme = TextTheme(
+    displayLarge: TextStyle(
+      fontSize: 75,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'NanumGothicCoding',
+      color: AppColorsLight.textColor,
+    ),
+    displayMedium: TextStyle(
+      fontSize: 50,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'NanumGothicCoding',
+      color: AppColorsLight.textColor,
+    ),
+    displaySmall: TextStyle(
+      fontSize: 35,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'NanumGothicCoding',
+      color: AppColorsLight.textColor,
+    )
+  );
+
+  static ThemeData themeData = ThemeData(
+    brightness: Brightness.light,
+    textTheme: textTheme,
+    colorScheme: AppColorsLight.customColorSchemeLight,
+  );
+}
+
 abstract final class AppColors {
   static const surface = Color.fromARGB(255, 97, 97, 97);
   static const onSurface = Colors.white;
   static const primaryColor = Colors.grey;
   static const onPrimaryColor = Colors.black;
-  static const secondaryColor = Colors.deepPurple;
+  static const secondaryColor = Color.fromARGB(255, 108,106,114);
   static const onSecondaryColor = Colors.white;
   static const errorColor = Colors.red;
   static const onErrorColor = Colors.redAccent;
@@ -51,6 +80,30 @@ abstract final class AppColors {
     error: AppColors.errorColor,
     onError: AppColors.onErrorColor,
   );
+}
+
+abstract final class AppColorsLight {
+  static const surface = Color.fromARGB(255, 132, 132, 132);
+  static const onSurface = Color.fromARGB(255, 83, 83, 83);
+  static const primaryColor = Colors.grey;
+  static const onPrimaryColor = Colors.black;
+  static const secondaryColor = Colors.grey;
+  static const onSecondaryColor = Colors.white;
+  static const errorColor = Colors.red;
+  static const onErrorColor = Colors.redAccent;
+  static const textColor = Colors.black;
+
+  static const customColorSchemeLight = ColorScheme(
+    brightness: Brightness.light,
+    primary: AppColorsLight.primaryColor,
+    onPrimary: AppColorsLight.onPrimaryColor,
+    secondary: AppColorsLight.secondaryColor,
+    onSecondary: AppColorsLight.onSecondaryColor, 
+    error: AppColorsLight.errorColor,
+    onError: AppColorsLight.onErrorColor,
+    surface: AppColorsLight.surface,
+    onSurface: AppColorsLight.onSurface);
+
 }
 
 abstract final class AppSpacing {
